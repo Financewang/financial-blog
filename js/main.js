@@ -150,20 +150,21 @@ const articleCards = document.querySelectorAll('.article-card');
 
 articleCards.forEach(card => {
     card.addEventListener('click', function(e) {
-        // 如果点击的是"阅读全文"链接，不做处理
-        if (e.target.classList.contains('read-more')) {
-            console.log('点击阅读全文');
-            e.preventDefault();
-            // 这里可以添加跳转到文章详情页的逻辑
+        // 如果点击的是"阅读全文"链接，允许正常跳转
+        if (e.target.classList.contains('read-more') || e.target.closest('.read-more')) {
+            // 不阻止默认行为，让链接正常工作
             return;
         }
         
-        // 卡片点击效果
-        this.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-            this.style.transform = 'translateY(-2px)';
-        }, 100);
+        // 如果点击卡片其他区域，也跳转到文章详情页
+        const readMoreLink = this.querySelector('.read-more');
+        if (readMoreLink) {
+            window.location.href = readMoreLink.getAttribute('href');
+        }
     });
+    
+    // 添加hover效果提示
+    card.style.cursor = 'pointer';
 });
 
 // ==================== 写文章按钮 ====================
@@ -182,6 +183,45 @@ if (writeBtn) {
     });
 }
 
+// ==================== 二维码弹窗 ====================
+const qrModal = document.getElementById('qrModal');
+const qrModalImage = document.getElementById('qrModalImage');
+const qrModalTitle = document.getElementById('qrModalTitle');
+const qrModalDesc = document.getElementById('qrModalDesc');
+const closeQrModal = document.getElementById('closeQrModal');
+
+// 打开二维码弹窗
+function openQrModal(imageSrc, title, desc) {
+    qrModalImage.src = imageSrc;
+    qrModalTitle.textContent = title;
+    qrModalDesc.textContent = desc;
+    qrModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 禁止背景滚动
+}
+
+// 关闭二维码弹窗
+function closeQrModalFunc() {
+    qrModal.classList.remove('active');
+    document.body.style.overflow = ''; // 恢复滚动
+}
+
+// 点击关闭按钮
+if (closeQrModal) {
+    closeQrModal.addEventListener('click', closeQrModalFunc);
+}
+
+// 点击遮罩层关闭
+if (qrModal) {
+    qrModal.querySelector('.qr-modal-overlay').addEventListener('click', closeQrModalFunc);
+}
+
+// 按ESC键关闭
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && qrModal.classList.contains('active')) {
+        closeQrModalFunc();
+    }
+});
+
 // ==================== 社交链接点击 ====================
 const socialLinks = document.querySelectorAll('.social-link');
 
@@ -190,6 +230,7 @@ socialLinks.forEach(link => {
         e.preventDefault();
         
         const socialName = this.querySelector('.social-name').textContent;
+        const qrImage = this.getAttribute('data-qr');
         
         // 添加点击动画
         this.style.transform = 'translateX(8px) scale(1.02)';
@@ -199,11 +240,20 @@ socialLinks.forEach(link => {
         
         console.log('点击: ' + socialName);
         
-        // 显示提示信息
-        if (socialName.includes('微信')) {
-            alert('请搜索公众号：老汪的Financial笔记\n\n或扫描二维码关注');
-        } else if (socialName.includes('小红书')) {
-            alert('请在小红书搜索：@老汪的Financial笔记\n\n关注后可获取更多财务干货！');
+        // 显示二维码弹窗
+        if (qrImage) {
+            let title = '';
+            let desc = '';
+            
+            if (socialName.includes('微信')) {
+                title = '微信公众号';
+                desc = '使用微信扫码关注「老汪的Financial笔记」';
+            } else if (socialName.includes('小红书')) {
+                title = '小红书';
+                desc = '使用小红书扫码关注 @老汪的Financial笔记';
+            }
+            
+            openQrModal(qrImage, title, desc);
         }
     });
 });
