@@ -3,1074 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>老汪的Financial笔记 - 财务人的实战笔记</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #e8f5e9 0%, #e3f2fd 50%, #f3e5f5 100%);
-            min-height: 100vh;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 280px 1fr 320px;
-            gap: 24px;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 24px;
-            min-height: 100vh;
-        }
-
-        /* 左侧导航栏 */
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            height: fit-content;
-            position: sticky;
-            top: 24px;
-        }
-
-        .logo {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo i {
-            color: #4caf50;
-        }
-
-        .nav-section {
-            margin-bottom: 32px;
-        }
-
-        .nav-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #555;
-            margin-bottom: 4px;
-            background: transparent;
-            border: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-item:hover {
-            background: #f5f5f5;
-            color: #4caf50;
-            transform: translateX(4px);
-        }
-
-        .nav-item.active {
-            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-            color: white;
-        }
-
-        .nav-item i {
-            width: 20px;
-            text-align: center;
-        }
-
-        /* 中央内容区 */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        /* 欢迎卡片 */
-        .welcome-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .welcome-text h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .welcome-text .subtitle {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 16px;
-        }
-
-        .welcome-text .description {
-            font-size: 14px;
-            opacity: 0.85;
-            line-height: 1.8;
-        }
-
-        /* 区块标题 */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .section-header h2 {
-            font-size: 24px;
-            color: #2c3e50;
-        }
-
-        .section-count {
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* 工具包/社群/关于我的简介卡片 */
-        .intro-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 32px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-        }
-
-        .intro-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .intro-card p {
-            font-size: 14px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        .intro-card.tools {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .intro-card.community {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .intro-card.about {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-
-        /* 文章列表 */
-        .articles-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .article-card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .article-card:hover {
-            border-color: #4caf50;
-            transform: translateX(8px);
-            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.15);
-        }
-
-        .article-date {
-            color: #999;
-            font-size: 13px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .article-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 12px;
-        }
-
-        .article-excerpt {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        .article-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .article-tags {
-            display: flex;
-            gap: 8px;
-        }
-
-        .tag {
-            padding: 4px 12px;
-            background: #f0f0f0;
-            border-radius: 12px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .read-more {
-            color: #4caf50;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* 右侧工具栏 */
-        .toolbar {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .tool-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        /* 时钟 */
-        .clock {
-            text-align: center;
-        }
-
-        .clock-display {
-            font-size: 48px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .date-display {
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* 日历 */
-        .calendar {
-            padding: 20px;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .calendar-title {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 12px;
-        }
-
-        .calendar-nav button {
-            background: #f5f5f5;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .calendar-nav button:hover {
-            background: #4caf50;
-            color: white;
-        }
-
-        .calendar-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .weekday {
-            text-align: center;
-            font-size: 12px;
-            color: #999;
-            font-weight: 600;
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-        }
-
-        .day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .day:hover {
-            background: #f0f0f0;
-        }
-
-        .day.today {
-            background: #4caf50;
-            color: white;
-            font-weight: 600;
-        }
-
-        .day.other-month {
-            color: #ccc;
-        }
-
-        /* 工具按钮 */
-        .write-btn {
-            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-            color: white;
-            border: none;
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
-        }
-
-        .write-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(76, 175, 80, 0.4);
-        }
-
-        /* 社交链接 */
-        .social-links {
-            display: grid;
-            gap: 12px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #f5f5f5;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #555;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        .social-link:hover {
-            background: #4caf50;
-            color: white;
-            transform: translateX(4px);
-        }
-
-        .social-link i {
-            font-size: 20px;
-        }
-
-        /* 二维码弹窗 */
-        .qr-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .qr-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .qr-content {
-            background: white;
-            border-radius: 24px;
-            padding: 32px;
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .qr-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: #f5f5f5;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-
-        .qr-close:hover {
-            background: #e0e0e0;
-            transform: rotate(90deg);
-        }
-
-        .qr-image {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            display: block;
-            border-radius: 16px;
-        }
-
-        .qr-title {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 24px;
-        }
-
-        .qr-description {
-            text-align: center;
-            color: #666;
-            margin-top: 16px;
-            font-size: 14px;
-        }
-
-        /* 文章详情弹窗 */
-        .article-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            overflow-y: auto;
-            padding: 40px 20px;
-        }
-
-        .article-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .article-detail {
-            background: white;
-            border-radius: 24px;
-            padding: 48px;
-            max-width: 900px;
-            width: 100%;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-            margin: auto;
-        }
-
-        .article-detail h1 {
-            font-size: 32px;
-            color: #2c3e50;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-
-        .article-meta {
-            display: flex;
-            gap: 24px;
-            color: #999;
-            font-size: 14px;
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .article-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .article-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .article-content h2 {
-            font-size: 24px;
-            color: #2c3e50;
-            margin: 32px 0 16px;
-            padding-left: 12px;
-            border-left: 4px solid #4caf50;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-        }
-
-        .article-content strong {
-            color: #4caf50;
-            font-weight: 600;
-        }
-
-        .article-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: #f5f5f5;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-
-        .article-close:hover {
-            background: #e0e0e0;
-            transform: rotate(90deg);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar, .toolbar {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-                gap: 16px;
-            }
-
-            .welcome-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .clock-display {
-                font-size: 36px;
-            }
-
-            .article-detail {
-                padding: 32px 24px;
-            }
-
-            .article-detail h1 {
-                font-size: 24px;
-            }
-
-            .qr-content, .article-detail {
-                padding: 24px;
-            }
-
-            .qr-image {
-                max-width: 300px;
-            }
-        }
-    </style>
+    <title>老汪的Financial笔记 - 财务BP的实战笔记</title>
+    <meta name="description" content="12年财务管理经验，专注经营分析和财务BP带教，让数字讲出商业故事">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- 左侧导航栏 -->
-        <aside class="sidebar">
+    <!-- 左侧导航栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
             <div class="logo">
                 <i class="fas fa-chart-line"></i>
-                老汪的Financial笔记
+                <span>老汪的Financial笔记</span>
             </div>
-
-            <nav class="nav-section">
-                <div class="nav-title">GENERAL</div>
-                <button class="nav-item active" onclick="scrollToSection('home')">
-                    <i class="fas fa-home"></i>
-                    <span>首页</span>
-                </button>
-                <button class="nav-item" onclick="scrollToSection('articles')">
-                    <i class="fas fa-file-alt"></i>
-                    <span>近期文章</span>
-                </button>
-                <button class="nav-item" onclick="scrollToSection('tools')">
-                    <i class="fas fa-toolbox"></i>
-                    <span>财务工具包</span>
-                </button>
-                <button class="nav-item" onclick="scrollToSection('community')">
-                    <i class="fas fa-users"></i>
-                    <span>BP社群</span>
-                </button>
-                <button class="nav-item" onclick="scrollToSection('about')">
-                    <i class="fas fa-user"></i>
-                    <span>关于我</span>
-                </button>
-            </nav>
-
-            <nav class="nav-section">
-                <div class="nav-title">外部链接</div>
-                <button class="nav-item" onclick="showQRCode('wechat')">
-                    <i class="fab fa-weixin"></i>
-                    <span>公众号</span>
-                </button>
-                <button class="nav-item" onclick="showQRCode('xiaohongshu')">
-                    <i class="fas fa-book"></i>
-                    <span>小红书</span>
-                </button>
-            </nav>
-        </aside>
-
-        <!-- 中央内容区 -->
-        <main class="main-content">
-            <!-- 欢迎卡片 -->
-            <div class="card welcome-card" id="home">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/touxiang.jpg" alt="老汪">
-                </div>
-                <div class="welcome-text">
-                    <h1>你好，我是老汪</h1>
-                    <div class="subtitle">财务人的实战笔记 | 让数字讲出商业故事</div>
-                    <div class="description">
-                        12年财务管理经验，历任多个公司财务总监，倡导战略财务，擅长经营分析，财务BP带教。不讲教条，只给实战方法。这里是思路碰撞的地方，不是灌输答案的课堂。
-                    </div>
-                </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3>GENERAL</h3>
+                <ul>
+                    <li class="active">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-newspaper"></i>
+                        <span>近期文章</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-toolbox"></i>
+                        <span>财务工具包</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-users"></i>
+                        <span>BP社群</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <span>关于我</span>
+                    </li>
+                </ul>
             </div>
-
-            <!-- 文章列表 -->
-            <div class="card" id="articles">
-                <div class="section-header">
-                    <h2>最新文章</h2>
-                    <span class="section-count">共 1 篇文章</span>
-                </div>
-                <div class="articles-grid">
-                    <div class="article-card" onclick="showArticle('equity')">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2024-09-01
-                        </div>
-                        <div class="article-title">有限公司之股权架构</div>
-                        <div class="article-excerpt">
-                            注册公司很方便，但注册前还是有很多选择题：注册资本金、股东如何选择等等。公司法修订草案三审过会，对于普通创业者来说，最大的变化就是注册资金由认缴制变更为登记注册5年内缴足。今天我们聊聊有限公司的股权，持有多少股权才算真的能控制公司呢？
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">股权架构</span>
-                                <span class="tag">公司法</span>
-                                <span class="tag">创业必读</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 财务工具包 -->
-            <div id="tools">
-                <div class="intro-card tools">
-                    <h3><i class="fas fa-toolbox"></i> 财务工具包</h3>
-                    <p>为财务人量身打造的实战工具集：本量利分析计算器、现金流预测模板、财务指标诊断表、经营分析框架……每个工具都是从真实业务场景中提炼，拿来即用，解决实际问题。</p>
-                </div>
-            </div>
-
-            <!-- BP社群 -->
-            <div id="community">
-                <div class="intro-card community">
-                    <h3><i class="fas fa-users"></i> BP社群</h3>
-                    <p>这里聚集了一群务实的财务BP，不谈虚的，只聊干货。每周案例拆解、每月专题研讨、不定期大咖分享。在这里，你的困惑有人懂，你的经验有人听，你的成长有人陪。</p>
-                </div>
-            </div>
-
-            <!-- 关于我 -->
-            <div id="about">
-                <div class="intro-card about">
-                    <h3><i class="fas fa-user-tie"></i> 关于我</h3>
-                    <p>老汪，12年财务实战经验，INFJ人格。曾任多个公司财务总监、咨询公司合伙人，带过几十人的财务团队。现在专注财务BP能力培养，相信财务不只是算账的，培养懂业务、能决策的战略伙伴。公众号和小红书：老汪的Financial笔记。</p>
-                </div>
-            </div>
-        </main>
-
-        <!-- 右侧工具栏 -->
-        <aside class="toolbar">
-            <!-- 写文章按钮 -->
-            <button class="write-btn" onclick="window.open('https://github.com/Financewang/financial-blog', '_blank')">
-                <i class="fas fa-pen"></i>
-                写文章
-            </button>
-
-            <!-- 时钟 -->
-            <div class="tool-card clock">
-                <div class="clock-display" id="clock">20:26</div>
-                <div class="date-display" id="date">2025/11/20 周四</div>
-            </div>
-
-            <!-- 日历 -->
-            <div class="tool-card calendar">
-                <div class="calendar-header">
-                    <div class="calendar-title" id="calendarTitle">2025年11月</div>
-                    <div class="calendar-nav">
-                        <button onclick="changeMonth(-1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button onclick="changeMonth(1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="calendar-weekdays">
-                    <div class="weekday">一</div>
-                    <div class="weekday">二</div>
-                    <div class="weekday">三</div>
-                    <div class="weekday">四</div>
-                    <div class="weekday">五</div>
-                    <div class="weekday">六</div>
-                    <div class="weekday">日</div>
-                </div>
-                <div class="calendar-days" id="calendarDays"></div>
-            </div>
-
-            <!-- 社交链接 -->
-            <div class="tool-card">
-                <div class="social-links">
-                    <button class="social-link" onclick="showQRCode('wechat')">
+            
+            <div class="nav-section">
+                <h3>外部链接</h3>
+                <ul>
+                    <li>
                         <i class="fab fa-weixin"></i>
-                        <span>微信公众号</span>
-                    </button>
-                    <button class="social-link" onclick="showQRCode('xiaohongshu')">
+                        <span>公众号</span>
+                    </li>
+                    <li>
                         <i class="fas fa-book"></i>
-                        <span>小红书账号</span>
-                    </button>
-                    <a href="https://github.com/Financewang" class="social-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
+                        <span>小红书</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="write-btn">
+                <i class="fas fa-pen"></i>
+                <span>写文章</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 欢迎卡片 -->
+        <section class="welcome-card card">
+            <div class="welcome-content">
+                <div class="avatar-section">
+                    <div class="avatar">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="welcome-text">
+                        <h1>你好，我是老汪</h1>
+                        <p class="subtitle">财务人的实战笔记 | 让数字讲出商业故事</p>
+                        <p class="description">
+                            12年财务管理经验，历任多个公司财务总监，倡导战略财务，擅长经营分析。
+                            不讲教条，只给实战方法。这里是财务BP的成长基地。
+                        </p>
+                    </div>
+                </div>
+                <div class="welcome-illustration">
+                    <i class="fas fa-chart-bar"></i>
                 </div>
             </div>
-        </aside>
-    </div>
+        </section>
 
-    <!-- 二维码弹窗 -->
-    <div class="qr-modal" id="qrModal" onclick="closeQRCode(event)">
-        <div class="qr-content" onclick="event.stopPropagation()">
-            <button class="qr-close" onclick="closeQRCode()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="qr-title" id="qrTitle"></div>
-            <img class="qr-image" id="qrImage" src="" alt="二维码">
-            <div class="qr-description" id="qrDescription"></div>
-        </div>
-    </div>
-
-    <!-- 文章详情弹窗 -->
-    <div class="article-modal" id="articleModal" onclick="closeArticle(event)">
-        <div class="article-detail" onclick="event.stopPropagation()">
-            <button class="article-close" onclick="closeArticle()">
-                <i class="fas fa-times"></i>
-            </button>
-            <h1>有限公司之股权架构</h1>
-            <div class="article-meta">
-                <span><i class="far fa-calendar"></i> 2024年9月1日</span>
-                <span><i class="far fa-user"></i> 老汪</span>
-                <span><i class="far fa-eye"></i> 财务实战</span>
+        <!-- 最新文章 -->
+        <section class="articles-section">
+            <div class="section-header">
+                <h2>最新文章</h2>
+                <span class="article-count">共 3 篇文章</span>
             </div>
-            <div class="article-content">
-                <p>9月1日，我写了怎么选择公司主体，今天聊关于有限责任公司的股权结构。我们知道注册公司很方便，但注册前还是有很多选择题，比如：注册资本金，股东如何选择等等问题。</p>
-                
-                <p>公司法修订草案三审过会，其中对于普通创业者来说，最大的变化就是<strong>注册资金由认缴制变更为登记注册5年内缴足</strong>。这对于很多创业者来说，压力会比较大，但从另外一个角度考虑，也是好事，少了很多不实际经营业务的空壳公司。</p>
+            
+            <div class="articles-grid">
+                <!-- 文章卡片1 -->
+                <article class="article-card card">
+                    <div class="article-meta">
+                        <span class="date">
+                            <i class="far fa-calendar"></i>
+                            2025-11-22
+                        </span>
+                        <span class="tag">创业融资</span>
+                    </div>
+                    <h3 class="article-title">创业融资找FA？这20家机构靠谱，但要小心这些坑</h3>
+                    <p class="article-excerpt">
+                        创业者找钱，有两条路。一条是自己拿着BP到处投，效率低，成功率更低。
+                        另一条是找FA帮你对接投资人，专业的事交给专业的人做。但FA这个行业，水很深。
+                    </p>
+                    <div class="article-footer">
+                        <span class="read-time">
+                            <i class="far fa-clock"></i>
+                            8 分钟阅读
+                        </span>
+                        <a href="articles/article1.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
 
-                <p>今天我们先聊聊有限公司的股权，说到股权，那<strong>持有多少股权才算真的能控制公司呢？</strong>之前看到媒体报道关于公司实控人的各种新闻，今天笔者就来帮大家捋一捋。</p>
+                <!-- 文章卡片2 -->
+                <article class="article-card card">
+                    <div class="article-meta">
+                        <span class="date">
+                            <i class="far fa-calendar"></i>
+                            2025-11-22
+                        </span>
+                        <span class="tag">投资机构</span>
+                    </div>
+                    <h3 class="article-title">创业者必备：最新投资机构和商业计划书投递邮箱，建议收藏！</h3>
+                    <p class="article-excerpt">
+                        在创业这条路上，找到合适的投资人，比找对象还难。不是钱的问题，是门路的问题。
+                        你辛辛苦苦打磨出来的BP，发给谁？怎么发？发了会不会石沉大海？
+                    </p>
+                    <div class="article-footer">
+                        <span class="read-time">
+                            <i class="far fa-clock"></i>
+                            12 分钟阅读
+                        </span>
+                        <a href="articles/article2.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
 
-                <h2>1、申请解散权—10%</h2>
-                <p>《公司法》第一百八十二条规定，<strong>持有公司全部股东表决权百分之十以上的股东，可以请求人民法院解散公司</strong>。所以作为参与实际经营的投资人，建议拥有不低于10%的股权比例。</p>
+                <!-- 文章卡片3 -->
+                <article class="article-card card">
+                    <div class="article-meta">
+                        <span class="date">
+                            <i class="far fa-calendar"></i>
+                            2025-11-22
+                        </span>
+                        <span class="tag">BP技巧</span>
+                    </div>
+                    <h3 class="article-title">创业者还想拿融资？我建议你先用投资人的视角看看自己的BP</h3>
+                    <p class="article-excerpt">
+                        这两天又有个创业者找我，说想融资，问我能不能帮他对接投资人。
+                        我看了他的BP，第一感觉是：这人压根没见过投资人长什么样。
+                    </p>
+                    <div class="article-footer">
+                        <span class="read-time">
+                            <i class="far fa-clock"></i>
+                            6 分钟阅读
+                        </span>
+                        <a href="articles/article3.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
 
-                <h2>2、重大影响线—20%</h2>
-                <p>《企业会计准则》规定，<strong>当股东持股比例超过20%但低于50%时，通常被认为对被投资公司有重大影响</strong>。投资方一旦对被投资方有重大影响，将被要求以"权益法"对该项投资进行会计核算。</p>
-
-                <h2>3、外资待遇线—25%</h2>
-                <p>在中外合资企业中，<strong>外国投资者的投资比例一般不低于25%</strong>。外国投资者在并购后所设外商投资企业注册资本中的出资比例高于25%的，该企业才可以享受外商投资企业待遇。</p>
-
-                <h2>4、一票否决权—34%</h2>
-                <p>《公司法》第四十三条规定，股东会会议作出修改公司章程、增加或者减少注册资本的决议，以及公司合并、分立、解散或者变更公司形式的决议，<strong>必须经代表三分之二以上（66.67%）表决权的股东通过</strong>。</p>
-                <p>也就是说，只要持股超过34%，对股东会这七项事项表决权就拥有一票否决权。这是保护少数股东权益的重要防线。</p>
-
-                <h2>5、绝对控制权—51%</h2>
-                <p>除第4条的7项事项以外，<strong>持股超过51%就拥有了公司的话语权和决策权</strong>。日常经营决策、人事任免、利润分配等重大事项，都可以一锤定音。</p>
-
-                <h2>6、完美控制权—67%</h2>
-                <p>继续对照第4条，<strong>拥有了超过三分之二的表决权，即拥有了公司的完全控制权</strong>。修改章程、增减资本、合并分立、解散公司——所有重大事项都可以独立决定，不会被其他股东否决。</p>
-
-                <h2>实战建议</h2>
-                <p>理解这些股权比例的意义，对于创业者和投资人都至关重要：</p>
-                <p><strong>如果你是创始人</strong>：尽量保持67%以上的控制权，至少要确保51%的绝对控股。如果不得不稀释股权，底线是保住34%的一票否决权。</p>
-                <p><strong>如果你是投资人</strong>：即使不追求控制权，也要争取20%以上的持股，确保对公司有重大影响；如果投入较大，34%的一票否决权是必须的。</p>
-                <p><strong>如果你是小股东</strong>：至少要保住10%，这是你最后的底牌——可以申请解散公司，在极端情况下保护自己的利益。</p>
-
-                <p>股权架构不是简单的数字游戏，而是关系到公司治理、决策效率、利益平衡的核心问题。设计时要充分考虑公司发展阶段、股东背景、资金需求等多方面因素，必要时请专业律师和财务顾问帮助把关。</p>
+    <!-- 右侧边栏 -->
+    <aside class="right-sidebar">
+        <!-- 时钟卡片 -->
+        <div class="clock-card card">
+            <div class="clock-display">
+                <div class="time" id="time">00:00:00</div>
+                <div class="date" id="date">2025年1月</div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // 时钟功能
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        <!-- 日历卡片 -->
+        <div class="calendar-card card">
+            <div class="calendar-header">
+                <button class="calendar-nav" id="prevMonth">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="calendar-title" id="calendarTitle">2025年1月</span>
+                <button class="calendar-nav" id="nextMonth">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="calendar-body" id="calendar"></div>
+        </div>
 
-            const year = now.getFullYear();
-            const month = now.getMonth() + 1;
-            const day = now.getDate();
-            const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
-            const weekday = weekdays[now.getDay()];
-            document.getElementById('date').textContent = `${year}/${month}/${day} 周${weekday}`;
-        }
+        <!-- 快捷工具卡片 -->
+        <div class="tools-card card">
+            <h3>关注我</h3>
+            <div class="social-links">
+                <a href="#" class="social-link wechat">
+                    <i class="fab fa-weixin"></i>
+                    <div class="social-info">
+                        <span class="social-name">微信公众号</span>
+                        <span class="social-desc">老汪的Financial笔记</span>
+                    </div>
+                </a>
+                <a href="#" class="social-link xiaohongshu">
+                    <i class="fas fa-book"></i>
+                    <div class="social-info">
+                        <span class="social-name">小红书</span>
+                        <span class="social-desc">@老汪的Financial笔记</span>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-        updateClock();
-        setInterval(updateClock, 1000);
+        <!-- 工具推荐卡片 -->
+        <div class="recommend-card card">
+            <h3>实用工具</h3>
+            <ul class="tool-list">
+                <li>
+                    <i class="fas fa-file-excel"></i>
+                    <span>财务分析工具包</span>
+                </li>
+                <li>
+                    <i class="fas fa-chart-pie"></i>
+                    <span>本量利计算器</span>
+                </li>
+                <li>
+                    <i class="fas fa-calculator"></i>
+                    <span>ROI评估模板</span>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-        // 日历功能
-        let currentDate = new Date();
-
-        function renderCalendar() {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            document.getElementById('calendarTitle').textContent = `${year}年${month + 1}月`;
-            
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const prevLastDay = new Date(year, month, 0);
-            
-            const firstDayWeek = firstDay.getDay() === 0 ? 7 : firstDay.getDay();
-            const lastDate = lastDay.getDate();
-            const prevLastDate = prevLastDay.getDate();
-            
-            const daysContainer = document.getElementById('calendarDays');
-            daysContainer.innerHTML = '';
-            
-            const today = new Date();
-            const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
-            const todayDate = today.getDate();
-            
-            for (let i = firstDayWeek - 1; i > 0; i--) {
-                const day = document.createElement('div');
-                day.className = 'day other-month';
-                day.textContent = prevLastDate - i + 1;
-                daysContainer.appendChild(day);
-            }
-            
-            for (let i = 1; i <= lastDate; i++) {
-                const day = document.createElement('div');
-                day.className = 'day';
-                if (isCurrentMonth && i === todayDate) {
-                    day.classList.add('today');
-                }
-                day.textContent = i;
-                daysContainer.appendChild(day);
-            }
-            
-            const remainingDays = 42 - (firstDayWeek - 1 + lastDate);
-            for (let i = 1; i <= remainingDays; i++) {
-                const day = document.createElement('div');
-                day.className = 'day other-month';
-                day.textContent = i;
-                daysContainer.appendChild(day);
-            }
-        }
-
-        function changeMonth(delta) {
-            currentDate.setMonth(currentDate.getMonth() + delta);
-            renderCalendar();
-        }
-
-        renderCalendar();
-
-        // 平滑滚动到指定区域
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // 更新导航高亮
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                event.target.closest('.nav-item').classList.add('active');
-            }
-        }
-
-        // 二维码弹窗功能
-        function showQRCode(type) {
-            const modal = document.getElementById('qrModal');
-            const title = document.getElementById('qrTitle');
-            const image = document.getElementById('qrImage');
-            const description = document.getElementById('qrDescription');
-
-            if (type === 'wechat') {
-                title.textContent = '微信公众号';
-                image.src = 'https://raw.githubusercontent.com/Financewang/financial-blog/main/images/wechat-qr.jpg';
-                description.textContent = '扫码关注公众号"老汪的Financial笔记"';
-            } else if (type === 'xiaohongshu') {
-                title.textContent = '小红书账号';
-                image.src = 'https://raw.githubusercontent.com/Financewang/financial-blog/main/images/xiaohongshu.jpg';
-                description.textContent = '小红书号：qianmiaomiao8 | 扫码关注获取更多财务实战内容';
-            }
-
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeQRCode(event) {
-            if (!event || event.target.id === 'qrModal') {
-                const modal = document.getElementById('qrModal');
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // 文章详情弹窗
-        function showArticle(articleId) {
-            const modal = document.getElementById('articleModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeArticle(event) {
-            if (!event || event.target.id === 'articleModal') {
-                const modal = document.getElementById('articleModal');
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // ESC键关闭弹窗
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeQRCode();
-                closeArticle();
-            }
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
