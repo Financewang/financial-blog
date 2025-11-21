@@ -396,6 +396,11 @@
             text-decoration: none;
             color: #555;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
         }
 
         .social-link:hover {
@@ -406,6 +411,103 @@
 
         .social-link i {
             font-size: 20px;
+        }
+
+        /* 二维码弹窗 */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .qr-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .qr-content {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .qr-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f5f5f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .qr-close:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
+        .qr-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .qr-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 24px;
+        }
+
+        .qr-description {
+            text-align: center;
+            color: #666;
+            margin-top: 16px;
+            font-size: 14px;
         }
 
         /* 响应式设计 */
@@ -432,6 +534,14 @@
 
             .clock-display {
                 font-size: 36px;
+            }
+
+            .qr-content {
+                padding: 24px;
+            }
+
+            .qr-image {
+                max-width: 300px;
             }
         }
     </style>
@@ -471,14 +581,14 @@
 
             <nav class="nav-section">
                 <div class="nav-title">外部链接</div>
-                <div class="nav-item">
+                <button class="nav-item" onclick="showQRCode('wechat')">
                     <i class="fab fa-weixin"></i>
                     <span>公众号</span>
-                </div>
-                <div class="nav-item">
+                </button>
+                <button class="nav-item" onclick="showQRCode('xiaohongshu')">
                     <i class="fas fa-book"></i>
                     <span>小红书</span>
-                </div>
+                </button>
             </nav>
         </aside>
 
@@ -670,21 +780,33 @@
             <!-- 社交链接 -->
             <div class="tool-card">
                 <div class="social-links">
-                    <a href="#" class="social-link">
+                    <button class="social-link" onclick="showQRCode('wechat')">
                         <i class="fab fa-weixin"></i>
                         <span>微信公众号</span>
-                    </a>
-                    <a href="#" class="social-link">
+                    </button>
+                    <button class="social-link" onclick="showQRCode('xiaohongshu')">
                         <i class="fas fa-book"></i>
                         <span>小红书账号</span>
-                    </a>
-                    <a href="#" class="social-link">
+                    </button>
+                    <a href="https://github.com/Financewang" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
                     </a>
                 </div>
             </div>
         </aside>
+    </div>
+
+    <!-- 二维码弹窗 -->
+    <div class="qr-modal" id="qrModal" onclick="closeQRCode(event)">
+        <div class="qr-content" onclick="event.stopPropagation()">
+            <button class="qr-close" onclick="closeQRCode()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="qr-title" id="qrTitle"></div>
+            <img class="qr-image" id="qrImage" src="" alt="二维码">
+            <div class="qr-description" id="qrDescription"></div>
+        </div>
     </div>
 
     <script>
@@ -766,12 +888,50 @@
 
         renderCalendar();
 
+        // 二维码弹窗功能
+        function showQRCode(type) {
+            const modal = document.getElementById('qrModal');
+            const title = document.getElementById('qrTitle');
+            const image = document.getElementById('qrImage');
+            const description = document.getElementById('qrDescription');
+
+            if (type === 'wechat') {
+                title.textContent = '微信公众号';
+                image.src = 'https://raw.githubusercontent.com/Financewang/financial-blog/main/images/wechat-qr.jpg';
+                description.textContent = '扫码关注公众号"老汪的Financial笔记"';
+            } else if (type === 'xiaohongshu') {
+                title.textContent = '小红书账号';
+                image.src = 'https://raw.githubusercontent.com/Financewang/financial-blog/main/images/xiaohongshu.jpg';
+                description.textContent = '小红书号：qianmiaomiao8 | 扫码关注获取更多财务实战内容';
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQRCode(event) {
+            if (!event || event.target.id === 'qrModal') {
+                const modal = document.getElementById('qrModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeQRCode();
+            }
+        });
+
         // 导航菜单交互
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
+            if (!item.hasAttribute('onclick')) {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            }
         });
 
         // 文章卡片点击
