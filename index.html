@@ -6,10 +6,14 @@
     <title>老汪的Financial笔记 - 财务BP的实战笔记</title>
     <meta name="description" content="12年财务管理经验，专注经营分析和财务BP带教，让数字讲出商业故事">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome 图标库 - 使用多个CDN源确保加载 -->
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.font.im/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- 左侧导航栏 -->
@@ -78,7 +82,7 @@
             <div class="welcome-content">
                 <div class="avatar-section">
                     <div class="avatar">
-                        <i class="fas fa-calculator"></i>
+                        <img src="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/touxiang.jpg" alt="老汪头像">
                     </div>
                     <div class="welcome-text">
                         <h1>你好，我是老汪</h1>
@@ -203,20 +207,35 @@
         <div class="tools-card card">
             <h3>关注我</h3>
             <div class="social-links">
-                <a href="#" class="social-link wechat">
+                <a href="#" class="social-link wechat" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/wechat-qr.jpg">
                     <i class="fab fa-weixin"></i>
                     <div class="social-info">
                         <span class="social-name">微信公众号</span>
                         <span class="social-desc">老汪的Financial笔记</span>
                     </div>
                 </a>
-                <a href="#" class="social-link xiaohongshu">
+                <a href="#" class="social-link xiaohongshu" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/xiaohongshu.jpg">
                     <i class="fas fa-book"></i>
                     <div class="social-info">
                         <span class="social-name">小红书</span>
                         <span class="social-desc">@老汪的Financial笔记</span>
                     </div>
                 </a>
+            </div>
+        </div>
+        
+        <!-- 二维码弹窗 -->
+        <div class="qr-modal" id="qrModal">
+            <div class="qr-modal-overlay"></div>
+            <div class="qr-modal-content">
+                <button class="qr-modal-close" id="closeQrModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="qr-modal-body">
+                    <h3 id="qrModalTitle">扫码关注</h3>
+                    <img id="qrModalImage" src="" alt="二维码">
+                    <p id="qrModalDesc">使用微信扫码关注</p>
+                </div>
             </div>
         </div>
 
