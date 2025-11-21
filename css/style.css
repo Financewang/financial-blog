@@ -571,6 +571,111 @@ body {
     color: white;
 }
 
+/* ==================== 二维码弹窗 ==================== */
+.qr-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.qr-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.qr-modal-content {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.qr-modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--bg-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.qr-modal-close:hover {
+    background: var(--accent-blue);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.qr-modal-body {
+    text-align: center;
+}
+
+.qr-modal-body h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.qr-modal-body img {
+    width: 280px;
+    height: 280px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+}
+
+.qr-modal-body p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* 头像样式优化 */
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 /* ==================== 响应式设计 ==================== */
 @media (max-width: 1400px) {
     body {
