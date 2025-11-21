@@ -346,6 +346,26 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// ==================== 左侧导航社交链接 ====================
+const socialNavLinks = document.querySelectorAll('.social-nav-link');
+
+socialNavLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const qrImage = this.getAttribute('data-qr');
+        const title = this.getAttribute('data-title');
+        const desc = this.getAttribute('data-desc');
+        
+        console.log('点击左侧导航: ' + title);
+        
+        // 显示二维码弹窗
+        if (qrImage && title && desc) {
+            openQrModal(qrImage, title, desc);
+        }
+    });
+});
+
 // ==================== 控制台欢迎信息 ====================
 console.log('%c老汪的Financial笔记', 'color: #667eea; font-size: 24px; font-weight: bold;');
 console.log('%c财务人的实战笔记 | 让数字讲出商业故事', 'color: #48bb78; font-size: 14px;');
