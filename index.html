@@ -78,6 +78,10 @@
             transition: all 0.3s ease;
             color: #555;
             margin-bottom: 4px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
         }
 
         .nav-item:hover {
@@ -129,12 +133,15 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
+            overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .welcome-text h1 {
@@ -154,24 +161,57 @@
             line-height: 1.8;
         }
 
-        /* 文章列表 */
-        .articles-header {
+        /* 区块标题 */
+        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
         }
 
-        .articles-header h2 {
+        .section-header h2 {
             font-size: 24px;
             color: #2c3e50;
         }
 
-        .article-count {
+        .section-count {
             color: #999;
             font-size: 14px;
         }
 
+        /* 工具包/社群/关于我的简介卡片 */
+        .intro-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .intro-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .intro-card.tools {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .intro-card.community {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .intro-card.about {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        /* 文章列表 */
         .articles-grid {
             display: grid;
             gap: 20px;
@@ -434,12 +474,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .qr-content {
@@ -510,6 +546,109 @@
             font-size: 14px;
         }
 
+        /* 文章详情弹窗 */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .article-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .article-detail {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            margin: auto;
+        }
+
+        .article-detail h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 24px;
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 32px 0 16px;
+            padding-left: 12px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content strong {
+            color: #4caf50;
+            font-weight: 600;
+        }
+
+        .article-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: #f5f5f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .article-close:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
         /* 响应式设计 */
         @media (max-width: 1200px) {
             .container {
@@ -536,7 +675,15 @@
                 font-size: 36px;
             }
 
-            .qr-content {
+            .article-detail {
+                padding: 32px 24px;
+            }
+
+            .article-detail h1 {
+                font-size: 24px;
+            }
+
+            .qr-content, .article-detail {
                 padding: 24px;
             }
 
@@ -557,26 +704,26 @@
 
             <nav class="nav-section">
                 <div class="nav-title">GENERAL</div>
-                <div class="nav-item active">
+                <button class="nav-item active" onclick="scrollToSection('home')">
                     <i class="fas fa-home"></i>
                     <span>首页</span>
-                </div>
-                <div class="nav-item">
+                </button>
+                <button class="nav-item" onclick="scrollToSection('articles')">
                     <i class="fas fa-file-alt"></i>
                     <span>近期文章</span>
-                </div>
-                <div class="nav-item">
+                </button>
+                <button class="nav-item" onclick="scrollToSection('tools')">
                     <i class="fas fa-toolbox"></i>
                     <span>财务工具包</span>
-                </div>
-                <div class="nav-item">
+                </button>
+                <button class="nav-item" onclick="scrollToSection('community')">
                     <i class="fas fa-users"></i>
                     <span>BP社群</span>
-                </div>
-                <div class="nav-item">
+                </button>
+                <button class="nav-item" onclick="scrollToSection('about')">
                     <i class="fas fa-user"></i>
                     <span>关于我</span>
-                </div>
+                </button>
             </nav>
 
             <nav class="nav-section">
@@ -595,9 +742,9 @@
         <!-- 中央内容区 -->
         <main class="main-content">
             <!-- 欢迎卡片 -->
-            <div class="card welcome-card">
+            <div class="card welcome-card" id="home">
                 <div class="avatar">
-                    <i class="fas fa-user-tie"></i>
+                    <img src="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/touxiang.jpg" alt="老汪">
                 </div>
                 <div class="welcome-text">
                     <h1>你好，我是老汪</h1>
@@ -609,125 +756,26 @@
             </div>
 
             <!-- 文章列表 -->
-            <div class="card">
-                <div class="articles-header">
+            <div class="card" id="articles">
+                <div class="section-header">
                     <h2>最新文章</h2>
-                    <span class="article-count">共 12 篇文章</span>
+                    <span class="section-count">共 1 篇文章</span>
                 </div>
                 <div class="articles-grid">
-                    <div class="article-card">
+                    <div class="article-card" onclick="showArticle('equity')">
                         <div class="article-date">
                             <i class="far fa-calendar"></i>
-                            2025-01-15
+                            2024-09-01
                         </div>
-                        <div class="article-title">财务BP如何做好经营分析</div>
+                        <div class="article-title">有限公司之股权架构</div>
                         <div class="article-excerpt">
-                            不要只盯着利润表（听他吹牛），也不要只看现金流（看他手头阔不阔绰），主要看资产负债表（家底是否殷实）。经营分析的本质是通过数字还原业务真相，帮老板看清楚钱从哪来、往哪去、能不能持续...
+                            注册公司很方便，但注册前还是有很多选择题：注册资本金、股东如何选择等等。公司法修订草案三审过会，对于普通创业者来说，最大的变化就是注册资金由认缴制变更为登记注册5年内缴足。今天我们聊聊有限公司的股权，持有多少股权才算真的能控制公司呢？
                         </div>
                         <div class="article-footer">
                             <div class="article-tags">
-                                <span class="tag">经营分析</span>
-                                <span class="tag">财务BP</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2025-01-12
-                        </div>
-                        <div class="article-title">本量利分析的实战应用</div>
-                        <div class="article-excerpt">
-                            本量利不是高深理论，是财务人手里最实用的决策工具。固定成本、变动成本、边际贡献——这三个词理解透了，你就能算清楚业务到底赚不赚钱。比如开店，房租是固定成本，原材料是变动成本...
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">本量利</span>
-                                <span class="tag">决策工具</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2025-01-08
-                        </div>
-                        <div class="article-title">财务人如何建立业务翻译能力</div>
-                        <div class="article-excerpt">
-                            业务部门说"市场竞争激烈，需要加大投入"，财务听到的应该是"费用要涨，ROI能保证吗"。翻译能力就是把业务语言转化成财务逻辑，再把财务结论转化成老板能懂的决策建议...
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">业务翻译</span>
-                                <span class="tag">能力提升</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2025-01-05
-                        </div>
-                        <div class="article-title">资产化思维：让钱生钱的底层逻辑</div>
-                        <div class="article-excerpt">
-                            买房、买股票、投资自己，本质都是资产化。衡量标准很简单：投资现金流净额为正，也就是收入大于支出。贷款买房？看月租金能不能覆盖月供。报培训班？看学完能不能涨薪或接到更多项目...
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">资产化</span>
-                                <span class="tag">投资思维</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2025-01-02
-                        </div>
-                        <div class="article-title">上市公司财报怎么看才靠谱</div>
-                        <div class="article-excerpt">
-                            不要只看净利润增长率，那是可以"调"出来的。重点看三个地方：经营现金流是否为正（有没有真金白银入账），应收账款占营收比例（钱收得回来吗），以及资产负债率（家底实不实）...
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">财报分析</span>
-                                <span class="tag">上市公司</span>
-                            </div>
-                            <div class="read-more">
-                                阅读全文 <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-date">
-                            <i class="far fa-calendar"></i>
-                            2024-12-28
-                        </div>
-                        <div class="article-title">财务BP的6个认知升级</div>
-                        <div class="article-excerpt">
-                            从记账到参谋，从成本卫士到价值创造者，财务BP的角色在变。这六个认知升级：从事后核算到事前规划，从数据搬运到洞察提炼，从被动响应到主动建议，从单点支持到系统赋能...
-                        </div>
-                        <div class="article-footer">
-                            <div class="article-tags">
-                                <span class="tag">认知升级</span>
-                                <span class="tag">角色定位</span>
+                                <span class="tag">股权架构</span>
+                                <span class="tag">公司法</span>
+                                <span class="tag">创业必读</span>
                             </div>
                             <div class="read-more">
                                 阅读全文 <i class="fas fa-arrow-right"></i>
@@ -736,12 +784,36 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 财务工具包 -->
+            <div id="tools">
+                <div class="intro-card tools">
+                    <h3><i class="fas fa-toolbox"></i> 财务工具包</h3>
+                    <p>为财务人量身打造的实战工具集：本量利分析计算器、现金流预测模板、财务指标诊断表、经营分析框架……每个工具都是从真实业务场景中提炼，拿来即用，解决实际问题。</p>
+                </div>
+            </div>
+
+            <!-- BP社群 -->
+            <div id="community">
+                <div class="intro-card community">
+                    <h3><i class="fas fa-users"></i> BP社群</h3>
+                    <p>这里聚集了一群务实的财务BP，不谈虚的，只聊干货。每周案例拆解、每月专题研讨、不定期大咖分享。在这里，你的困惑有人懂，你的经验有人听，你的成长有人陪。</p>
+                </div>
+            </div>
+
+            <!-- 关于我 -->
+            <div id="about">
+                <div class="intro-card about">
+                    <h3><i class="fas fa-user-tie"></i> 关于我</h3>
+                    <p>老汪，12年财务实战经验，INFJ人格。从四大出来后，做过上市公司财务总监，带过几十人的财务团队。现在专注财务BP能力培养，相信财务不只是算账的，更是懂业务、能决策的战略伙伴。公众号和小红书：老汪的Financial笔记。</p>
+                </div>
+            </div>
         </main>
 
         <!-- 右侧工具栏 -->
         <aside class="toolbar">
             <!-- 写文章按钮 -->
-            <button class="write-btn">
+            <button class="write-btn" onclick="window.open('https://github.com/Financewang/financial-blog', '_blank')">
                 <i class="fas fa-pen"></i>
                 写文章
             </button>
@@ -809,6 +881,55 @@
         </div>
     </div>
 
+    <!-- 文章详情弹窗 -->
+    <div class="article-modal" id="articleModal" onclick="closeArticle(event)">
+        <div class="article-detail" onclick="event.stopPropagation()">
+            <button class="article-close" onclick="closeArticle()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h1>有限公司之股权架构</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> 2024年9月1日</span>
+                <span><i class="far fa-user"></i> 老汪</span>
+                <span><i class="far fa-eye"></i> 财务实战</span>
+            </div>
+            <div class="article-content">
+                <p>9月1日，我写了怎么选择公司主体，今天聊关于有限责任公司的股权结构。我们知道注册公司很方便，但注册前还是有很多选择题，比如：注册资本金，股东如何选择等等问题。</p>
+                
+                <p>公司法修订草案三审过会，其中对于普通创业者来说，最大的变化就是<strong>注册资金由认缴制变更为登记注册5年内缴足</strong>。这对于很多创业者来说，压力会比较大，但从另外一个角度考虑，也是好事，少了很多不实际经营业务的空壳公司。</p>
+
+                <p>今天我们先聊聊有限公司的股权，说到股权，那<strong>持有多少股权才算真的能控制公司呢？</strong>之前看到媒体报道关于公司实控人的各种新闻，今天笔者就来帮大家捋一捋。</p>
+
+                <h2>1、申请解散权—10%</h2>
+                <p>《公司法》第一百八十二条规定，<strong>持有公司全部股东表决权百分之十以上的股东，可以请求人民法院解散公司</strong>。所以作为参与实际经营的投资人，建议拥有不低于10%的股权比例。</p>
+
+                <h2>2、重大影响线—20%</h2>
+                <p>《企业会计准则》规定，<strong>当股东持股比例超过20%但低于50%时，通常被认为对被投资公司有重大影响</strong>。投资方一旦对被投资方有重大影响，将被要求以"权益法"对该项投资进行会计核算。</p>
+
+                <h2>3、外资待遇线—25%</h2>
+                <p>在中外合资企业中，<strong>外国投资者的投资比例一般不低于25%</strong>。外国投资者在并购后所设外商投资企业注册资本中的出资比例高于25%的，该企业才可以享受外商投资企业待遇。</p>
+
+                <h2>4、一票否决权—34%</h2>
+                <p>《公司法》第四十三条规定，股东会会议作出修改公司章程、增加或者减少注册资本的决议，以及公司合并、分立、解散或者变更公司形式的决议，<strong>必须经代表三分之二以上（66.67%）表决权的股东通过</strong>。</p>
+                <p>也就是说，只要持股超过34%，对股东会这七项事项表决权就拥有一票否决权。这是保护少数股东权益的重要防线。</p>
+
+                <h2>5、绝对控制权—51%</h2>
+                <p>除第4条的7项事项以外，<strong>持股超过51%就拥有了公司的话语权和决策权</strong>。日常经营决策、人事任免、利润分配等重大事项，都可以一锤定音。</p>
+
+                <h2>6、完美控制权—67%</h2>
+                <p>继续对照第4条，<strong>拥有了超过三分之二的表决权，即拥有了公司的完全控制权</strong>。修改章程、增减资本、合并分立、解散公司——所有重大事项都可以独立决定，不会被其他股东否决。</p>
+
+                <h2>实战建议</h2>
+                <p>理解这些股权比例的意义，对于创业者和投资人都至关重要：</p>
+                <p><strong>如果你是创始人</strong>：尽量保持67%以上的控制权，至少要确保51%的绝对控股。如果不得不稀释股权，底线是保住34%的一票否决权。</p>
+                <p><strong>如果你是投资人</strong>：即使不追求控制权，也要争取20%以上的持股，确保对公司有重大影响；如果投入较大，34%的一票否决权是必须的。</p>
+                <p><strong>如果你是小股东</strong>：至少要保住10%，这是你最后的底牌——可以申请解散公司，在极端情况下保护自己的利益。</p>
+
+                <p>股权架构不是简单的数字游戏，而是关系到公司治理、决策效率、利益平衡的核心问题。设计时要充分考虑公司发展阶段、股东背景、资金需求等多方面因素，必要时请专业律师和财务顾问帮助把关。</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 时钟功能
         function updateClock() {
@@ -852,7 +973,6 @@
             const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
             const todayDate = today.getDate();
             
-            // 上月日期
             for (let i = firstDayWeek - 1; i > 0; i--) {
                 const day = document.createElement('div');
                 day.className = 'day other-month';
@@ -860,7 +980,6 @@
                 daysContainer.appendChild(day);
             }
             
-            // 当月日期
             for (let i = 1; i <= lastDate; i++) {
                 const day = document.createElement('div');
                 day.className = 'day';
@@ -871,7 +990,6 @@
                 daysContainer.appendChild(day);
             }
             
-            // 下月日期
             const remainingDays = 42 - (firstDayWeek - 1 + lastDate);
             for (let i = 1; i <= remainingDays; i++) {
                 const day = document.createElement('div');
@@ -887,6 +1005,20 @@
         }
 
         renderCalendar();
+
+        // 平滑滚动到指定区域
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // 更新导航高亮
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                event.target.closest('.nav-item').classList.add('active');
+            }
+        }
 
         // 二维码弹窗功能
         function showQRCode(type) {
@@ -917,33 +1049,27 @@
             }
         }
 
+        // 文章详情弹窗
+        function showArticle(articleId) {
+            const modal = document.getElementById('articleModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticle(event) {
+            if (!event || event.target.id === 'articleModal') {
+                const modal = document.getElementById('articleModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
         // ESC键关闭弹窗
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeQRCode();
+                closeArticle();
             }
-        });
-
-        // 导航菜单交互
-        document.querySelectorAll('.nav-item').forEach(item => {
-            if (!item.hasAttribute('onclick')) {
-                item.addEventListener('click', function() {
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            }
-        });
-
-        // 文章卡片点击
-        document.querySelectorAll('.article-card').forEach(card => {
-            card.addEventListener('click', function() {
-                alert('文章详情页开发中...');
-            });
-        });
-
-        // 写文章按钮
-        document.querySelector('.write-btn').addEventListener('click', function() {
-            alert('文章编辑器开发中...');
         });
     </script>
 </body>
