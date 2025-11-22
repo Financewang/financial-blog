@@ -1,373 +1,364 @@
-// ==================== 时钟功能 ====================
-function updateClock() {
-    const now = new Date();
-    
-    // 更新时间
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    
-    const timeElement = document.getElementById('time');
-    if (timeElement) {
-        timeElement.textContent = timeString;
+// ===================================
+// Navigation
+// ===================================
+
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
     }
-    
-    // 更新日期
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const dateString = `${year}年${month}月`;
-    
-    const dateElement = document.getElementById('date');
-    if (dateElement) {
-        dateElement.textContent = dateString;
-    }
-}
+});
 
-// 每秒更新时钟
-setInterval(updateClock, 1000);
-updateClock(); // 立即执行一次
-
-// ==================== 日历功能 ====================
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth();
-
-function renderCalendar(year, month) {
-    const calendarElement = document.getElementById('calendar');
-    const calendarTitle = document.getElementById('calendarTitle');
-    
-    if (!calendarElement || !calendarTitle) return;
-    
-    // 更新标题
-    calendarTitle.textContent = `${year}年${month + 1}月`;
-    
-    // 清空日历
-    calendarElement.innerHTML = '';
-    
-    // 添加星期标题
-    const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
-    weekDays.forEach(day => {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day header';
-        dayElement.textContent = day;
-        calendarElement.appendChild(dayElement);
+// Mobile menu toggle
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
     });
     
-    // 获取当月第一天是星期几
-    const firstDay = new Date(year, month, 1).getDay();
-    
-    // 获取当月有多少天
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
-    // 获取上个月有多少天
-    const prevMonthDays = new Date(year, month, 0).getDate();
-    
-    // 添加上个月的日期
-    for (let i = firstDay - 1; i >= 0; i--) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day other-month';
-        dayElement.textContent = prevMonthDays - i;
-        calendarElement.appendChild(dayElement);
-    }
-    
-    // 添加当月的日期
-    const today = new Date();
-    const isCurrentMonth = year === today.getFullYear() && month === today.getMonth();
-    
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-        dayElement.textContent = day;
-        
-        if (isCurrentMonth && day === today.getDate()) {
-            dayElement.classList.add('today');
-        }
-        
-        calendarElement.appendChild(dayElement);
-    }
-    
-    // 计算需要填充的下个月日期
-    const totalCells = calendarElement.children.length - 7; // 减去星期标题
-    const remainingCells = 42 - totalCells - 7; // 6行×7列 - 已有单元格 - 星期标题
-    
-    // 添加下个月的日期
-    for (let day = 1; day <= remainingCells; day++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day other-month';
-        dayElement.textContent = day;
-        calendarElement.appendChild(dayElement);
-    }
-}
-
-// 上一月
-const prevMonthBtn = document.getElementById('prevMonth');
-if (prevMonthBtn) {
-    prevMonthBtn.addEventListener('click', () => {
-        currentMonth--;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
-        renderCalendar(currentYear, currentMonth);
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        });
     });
 }
 
-// 下一月
-const nextMonthBtn = document.getElementById('nextMonth');
-if (nextMonthBtn) {
-    nextMonthBtn.addEventListener('click', () => {
-        currentMonth++;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
+// ===================================
+// Scroll Animations
+// ===================================
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
-        renderCalendar(currentYear, currentMonth);
     });
-}
+}, observerOptions);
 
-// 初始化日历
-renderCalendar(currentYear, currentMonth);
+// Observe all animated elements
+const animatedElements = document.querySelectorAll('.service-card, .mission-item, .timeline-item, .feature-item, .partner-item');
+animatedElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
 
-// ==================== 导航交互 ====================
-const navItems = document.querySelectorAll('.sidebar-nav li');
+// ===================================
+// Smooth Scroll
+// ===================================
 
-navItems.forEach(item => {
-    item.addEventListener('click', function() {
-        // 移除所有active类
-        navItems.forEach(nav => nav.classList.remove('active'));
-        
-        // 添加active到当前项
-        this.classList.add('active');
-        
-        // 这里可以添加页面切换逻辑
-        const itemText = this.querySelector('span').textContent;
-        console.log('导航至: ' + itemText);
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
     });
 });
 
-// ==================== 文章卡片动画 ====================
-const articleCards = document.querySelectorAll('.article-card');
+// ===================================
+// Active Navigation Link
+// ===================================
 
-articleCards.forEach(card => {
-    card.addEventListener('click', function(e) {
-        // 如果点击的是"阅读全文"链接，允许正常跳转
-        if (e.target.classList.contains('read-more') || e.target.closest('.read-more')) {
-            // 不阻止默认行为，让链接正常工作
+const sections = document.querySelectorAll('section[id]');
+
+function updateActiveLink() {
+    const scrollY = window.pageYOffset;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveLink);
+
+// ===================================
+// Form Validation (for booking page)
+// ===================================
+
+const bookingForm = document.getElementById('bookingForm');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const companyName = document.getElementById('companyName').value.trim();
+        const contactPerson = document.getElementById('contactPerson').value.trim();
+        const contactPhone = document.getElementById('contactPhone').value.trim();
+        const serviceType = document.getElementById('serviceType').value;
+        
+        // Validation
+        if (!companyName) {
+            showAlert('请填写企业名称', 'error');
             return;
         }
         
-        // 如果点击卡片其他区域，也跳转到文章详情页
-        const readMoreLink = this.querySelector('.read-more');
-        if (readMoreLink) {
-            window.location.href = readMoreLink.getAttribute('href');
+        if (!contactPerson) {
+            showAlert('请填写联系人姓名', 'error');
+            return;
         }
+        
+        if (!contactPhone) {
+            showAlert('请填写联系方式', 'error');
+            return;
+        }
+        
+        // Phone validation
+        const phoneRegex = /^1[3-9]\d{9}$/;
+        if (!phoneRegex.test(contactPhone)) {
+            showAlert('请填写正确的手机号码', 'error');
+            return;
+        }
+        
+        if (!serviceType) {
+            showAlert('请选择需要的服务', 'error');
+            return;
+        }
+        
+        // If all validations pass
+        showAlert('预约提交成功！我们会尽快与您联系。', 'success');
+        bookingForm.reset();
     });
+}
+
+function showAlert(message, type) {
+    // Create alert element
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    alert.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 1rem 2rem;
+        background: ${type === 'success' ? '#D4AF37' : '#dc3545'};
+        color: ${type === 'success' ? '#0A0A0A' : '#fff'};
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        z-index: 9999;
+        animation: slideIn 0.3s ease;
+    `;
     
-    // 添加hover效果提示
-    card.style.cursor = 'pointer';
-});
-
-// ==================== 写文章按钮 ====================
-const writeBtn = document.querySelector('.write-btn');
-if (writeBtn) {
-    writeBtn.addEventListener('click', () => {
-        // 添加按钮点击动画
-        writeBtn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            writeBtn.style.transform = 'translateY(-2px)';
-        }, 100);
-        
-        console.log('点击写文章按钮');
-        // 这里可以添加跳转到写文章页面的逻辑
-        alert('写文章功能开发中...\n\n提示：可以集成Markdown编辑器，实现在线写作功能。');
-    });
+    document.body.appendChild(alert);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        alert.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => alert.remove(), 300);
+    }, 3000);
 }
 
-// ==================== 二维码弹窗 ====================
-const qrModal = document.getElementById('qrModal');
-const qrModalImage = document.getElementById('qrModalImage');
-const qrModalTitle = document.getElementById('qrModalTitle');
-const qrModalDesc = document.getElementById('qrModalDesc');
-const closeQrModal = document.getElementById('closeQrModal');
-
-// 打开二维码弹窗
-function openQrModal(imageSrc, title, desc) {
-    qrModalImage.src = imageSrc;
-    qrModalTitle.textContent = title;
-    qrModalDesc.textContent = desc;
-    qrModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // 禁止背景滚动
-}
-
-// 关闭二维码弹窗
-function closeQrModalFunc() {
-    qrModal.classList.remove('active');
-    document.body.style.overflow = ''; // 恢复滚动
-}
-
-// 点击关闭按钮
-if (closeQrModal) {
-    closeQrModal.addEventListener('click', closeQrModalFunc);
-}
-
-// 点击遮罩层关闭
-if (qrModal) {
-    qrModal.querySelector('.qr-modal-overlay').addEventListener('click', closeQrModalFunc);
-}
-
-// 按ESC键关闭
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && qrModal.classList.contains('active')) {
-        closeQrModalFunc();
+// Add animation styles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
-});
-
-// ==================== 社交链接点击 ====================
-const socialLinks = document.querySelectorAll('.social-link');
-
-socialLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const socialName = this.querySelector('.social-name').textContent;
-        const qrImage = this.getAttribute('data-qr');
-        
-        // 添加点击动画
-        this.style.transform = 'translateX(8px) scale(1.02)';
-        setTimeout(() => {
-            this.style.transform = 'translateX(4px)';
-        }, 100);
-        
-        console.log('点击: ' + socialName);
-        
-        // 显示二维码弹窗
-        if (qrImage) {
-            let title = '';
-            let desc = '';
-            
-            if (socialName.includes('微信')) {
-                title = '微信公众号';
-                desc = '使用微信扫码关注「老汪的Financial笔记」';
-            } else if (socialName.includes('小红书')) {
-                title = '小红书';
-                desc = '使用小红书扫码关注 @老汪的Financial笔记';
-            }
-            
-            openQrModal(qrImage, title, desc);
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
         }
-    });
-});
-
-// ==================== 工具列表点击 ====================
-const toolItems = document.querySelectorAll('.tool-list li');
-
-toolItems.forEach(tool => {
-    tool.addEventListener('click', function() {
-        const toolName = this.querySelector('span').textContent;
-        
-        // 添加点击动画
-        this.style.transform = 'translateX(8px) scale(1.02)';
-        setTimeout(() => {
-            this.style.transform = 'translateX(4px)';
-        }, 100);
-        
-        console.log('点击工具: ' + toolName);
-        
-        // 显示工具信息
-        alert(`${toolName}\n\n此功能即将推出，敬请期待！\n\n提示：可以在这里集成Excel模板下载、在线计算器等实用工具。`);
-    });
-});
-
-// ==================== 平滑滚动 ====================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        to {
+            transform: translateX(100%);
+            opacity: 0;
         }
-    });
-});
+    }
+`;
+document.head.appendChild(style);
 
-// ==================== 页面加载动画 ====================
+// ===================================
+// Loading Animation
+// ===================================
+
 window.addEventListener('load', () => {
-    // 为所有卡片添加淡入动画
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            
-            requestAnimationFrame(() => {
-                card.style.transition = 'all 0.5s ease';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            });
-        }, index * 50);
-    });
+    document.body.classList.add('loaded');
 });
 
-// ==================== 响应式菜单（移动端） ====================
-// 如果需要在移动端添加汉堡菜单，可以在这里实现
-const mobileBreakpoint = 1024;
+// ===================================
+// Particle Effect (optional enhancement)
+// ===================================
 
-function handleResize() {
-    const width = window.innerWidth;
+function createParticles() {
+    const particlesContainer = document.querySelector('.hero-particles');
+    if (!particlesContainer) return;
     
-    if (width <= mobileBreakpoint) {
-        console.log('移动端模式');
-        // 可以在这里添加移动端特定的逻辑
-    } else {
-        console.log('桌面模式');
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 4 + 1}px;
+            height: ${Math.random() * 4 + 1}px;
+            background: rgba(212, 175, 55, ${Math.random() * 0.5 + 0.2});
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: particleFloat ${Math.random() * 10 + 10}s linear infinite;
+            animation-delay: ${Math.random() * 5}s;
+        `;
+        particlesContainer.appendChild(particle);
     }
 }
 
-// 监听窗口大小变化
-window.addEventListener('resize', handleResize);
-handleResize(); // 初始化时执行一次
+createParticles();
 
-// ==================== 键盘快捷键 ====================
-document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + K: 聚焦搜索（如果有搜索功能）
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        console.log('快捷键: 搜索');
-        // 这里可以添加搜索功能
-    }
+// ===================================
+// Counter Animation (for stats)
+// ===================================
+
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
     
-    // Ctrl/Cmd + N: 写新文章
-    if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-        e.preventDefault();
-        console.log('快捷键: 写新文章');
-        writeBtn?.click();
-    }
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
+// Observe counters
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+            const target = parseInt(entry.target.dataset.target);
+            animateCounter(entry.target, target);
+            entry.target.classList.add('counted');
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(counter => {
+    counterObserver.observe(counter);
 });
 
-// ==================== 左侧导航社交链接 ====================
-const socialNavLinks = document.querySelectorAll('.social-nav-link');
+// ===================================
+// Lazy Loading Images
+// ===================================
 
-socialNavLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const qrImage = this.getAttribute('data-qr');
-        const title = this.getAttribute('data-title');
-        const desc = this.getAttribute('data-desc');
-        
-        console.log('点击左侧导航: ' + title);
-        
-        // 显示二维码弹窗
-        if (qrImage && title && desc) {
-            openQrModal(qrImage, title, desc);
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
         }
     });
 });
 
-// ==================== 控制台欢迎信息 ====================
-console.log('%c老汪的Financial笔记', 'color: #667eea; font-size: 24px; font-weight: bold;');
-console.log('%c财务人的实战笔记 | 让数字讲出商业故事', 'color: #48bb78; font-size: 14px;');
-console.log('%c\n欢迎来到我的博客！\n如有任何问题或建议，欢迎通过公众号联系我。', 'color: #718096; font-size: 12px;');
-console.log('\n💡 提示：按 Ctrl/Cmd + N 快速创建新文章\n');
+document.querySelectorAll('img[data-src]').forEach(img => {
+    imageObserver.observe(img);
+});
+
+// ===================================
+// Back to Top Button
+// ===================================
+
+const backToTop = document.createElement('button');
+backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+backToTop.className = 'back-to-top';
+backToTop.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #D4AF37 0%, #F4E4C1 100%);
+    color: #0A0A0A;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+    z-index: 999;
+`;
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.style.display = 'flex';
+    } else {
+        backToTop.style.display = 'none';
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+backToTop.addEventListener('mouseenter', () => {
+    backToTop.style.transform = 'translateY(-5px)';
+    backToTop.style.boxShadow = '0 8px 24px rgba(212, 175, 55, 0.5)';
+});
+
+backToTop.addEventListener('mouseleave', () => {
+    backToTop.style.transform = 'translateY(0)';
+    backToTop.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.3)';
+});
+
+// ===================================
+// Console Log (Developer Easter Egg)
+// ===================================
+
+console.log('%c新湾咨询集团 - 钱淼淼', 'color: #D4AF37; font-size: 24px; font-weight: bold;');
+console.log('%c成就未来价值企业', 'color: #006B7D; font-size: 14px;');
+console.log('%c如有技术问题，请联系：xinwancaizhi@163.com', 'color: #888; font-size: 12px;');
