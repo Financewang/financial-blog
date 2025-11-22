@@ -263,6 +263,7 @@ ul {
     z-index: 1;
     text-align: center;
     padding: var(--spacing-md);
+    padding-top: 140px; /* 增加上边距，避免与导航栏重叠 */
 }
 
 .logo-animation {
