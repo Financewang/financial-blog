@@ -80,74 +80,21 @@
                 </div>
 
                 <div class="booking-form-container">
-                    <form id="bookingForm" class="booking-form">
-                        <div class="form-group">
-                            <label for="companyName">企业名称 <span class="required">*</span></label>
-                            <input type="text" id="companyName" name="companyName" required placeholder="请输入企业名称">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactPerson">联系人 <span class="required">*</span></label>
-                            <input type="text" id="contactPerson" name="contactPerson" required placeholder="请输入您的姓名">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactPhone">联系方式 <span class="required">*</span></label>
-                            <input type="tel" id="contactPhone" name="contactPhone" required placeholder="请输入手机号码">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="serviceType">需要什么服务 <span class="required">*</span></label>
-                            <select id="serviceType" name="serviceType" required>
-                                <option value="">请选择服务类型</option>
-                                <optgroup label="财税合规板块">
-                                    <option value="财税合规服务">财税合规服务</option>
-                                    <option value="账务清理服务">账务清理服务</option>
-                                    <option value="财务托管服务">财务托管服务</option>
-                                    <option value="财税培训服务">财税培训服务</option>
-                                </optgroup>
-                                <optgroup label="股权架构板块">
-                                    <option value="BP服务">BP服务</option>
-                                    <option value="股权设计服务">股权设计服务</option>
-                                    <option value="境外股权服务">境外股权服务</option>
-                                    <option value="股权激励服务">股权激励服务</option>
-                                </optgroup>
-                                <optgroup label="行业研究板块">
-                                    <option value="消费研究">消费研究</option>
-                                    <option value="鞋服研究">鞋服研究</option>
-                                    <option value="供应链研究">供应链研究</option>
-                                    <option value="AI数字化">AI数字化</option>
-                                </optgroup>
-                                <optgroup label="MCN服务板块">
-                                    <option value="财税IP孵化">财税IP孵化</option>
-                                    <option value="教育与培训">教育与培训</option>
-                                    <option value="营销宣传">营销宣传</option>
-                                </optgroup>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="companySize">企业规模</label>
-                            <select id="companySize" name="companySize">
-                                <option value="">请选择（选填）</option>
-                                <option value="1-50人">1-50人</option>
-                                <option value="51-200人">51-200人</option>
-                                <option value="201-500人">201-500人</option>
-                                <option value="500人以上">500人以上</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">具体需求描述</label>
-                            <textarea id="message" name="message" rows="5" placeholder="请简要描述您的需求（选填）"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fas fa-paper-plane"></i> 提交预约
-                        </button>
-
-                        <p class="form-note">提交即表示您同意我们的隐私政策，我们将妥善保护您的个人信息</p>
-                    </form>
+                    <!-- 企鹅问卷嵌入 -->
+                    <div class="wenjuan-wrapper">
+                        <iframe 
+                            src="https://wj.qq.com/s2/24949516/d748/" 
+                            width="100%" 
+                            height="1200" 
+                            frameborder="0"
+                            scrolling="auto"
+                            class="wenjuan-iframe">
+                        </iframe>
+                    </div>
+                    <p class="form-note">
+                        <i class="fas fa-shield-alt"></i>
+                        提交即表示您同意我们的隐私政策，我们将妥善保护您的个人信息
+                    </p>
                 </div>
             </div>
         </div>
@@ -199,5 +146,29 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // iframe 加载效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.querySelector('.wenjuan-wrapper');
+            const iframe = document.querySelector('.wenjuan-iframe');
+            
+            if (wrapper && iframe) {
+                // 添加加载状态
+                wrapper.classList.add('loading');
+                
+                // iframe 加载完成后移除加载状态
+                iframe.addEventListener('load', function() {
+                    setTimeout(() => {
+                        wrapper.classList.remove('loading');
+                    }, 300);
+                });
+                
+                // 超时保护：5秒后自动移除加载状态
+                setTimeout(() => {
+                    wrapper.classList.remove('loading');
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>

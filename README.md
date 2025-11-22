@@ -4,7 +4,7 @@
 
 新湾咨询集团官网是一个专业的企业咨询服务平台，旗下钱淼淼品牌致力于为企业提供全生命周期的业财赋能服务。网站采用现代化设计风格，以金色和深蓝色为主色调，体现专业、信任和高端的品牌形象。
 
-**官网地址**：待部署  
+**官网地址**：https://qianmiaomiao.cn ✅  
 **备案信息**：渝ICP备2024031752号
 
 ---
@@ -100,10 +100,12 @@ financial-blog/
 - ✅ 每个服务详细说明和要点列表
 
 ### 服务预约页 (booking.html)
-- ✅ 预约表单（企业名称、联系人、联系方式、服务类型）
+- ✅ 腾讯企鹅问卷 iframe 嵌入
 - ✅ 15个服务小类下拉选择
-- ✅ 表单验证（必填项检查、手机号验证）
-- ✅ 提交成功提示
+- ✅ 微信公众号实时通知功能
+- ✅ 表单数据自动收集和管理
+- ✅ 优雅的加载动画效果
+- ✅ 响应式设计（移动端适配）
 - ✅ 信息安全承诺展示
 
 ### 交互功能 (main.js)
@@ -204,6 +206,70 @@ financial-blog/
 ---
 
 ## 📝 最近更新
+
+### 2025-11-22 - 预约表单企鹅问卷集成 ✅
+
+**更新内容**：
+1. ✅ 使用 iframe 嵌入腾讯企鹅问卷，实现微信通知功能
+2. ✅ 保持网站原有设计风格，问卷无缝集成到页面
+3. ✅ 添加优雅的加载动画效果
+4. ✅ 响应式适配（移动端自动调整高度）
+
+**修改文件**：
+- booking.html - 替换原有表单为 iframe 嵌入
+- css/booking.css - 新增 `.wenjuan-wrapper` 和 `.wenjuan-iframe` 样式
+
+**功能说明**：
+- 用户提交表单后，企业微信公众号"新湾财智"会实时收到通知
+- 表单数据自动存储在腾讯问卷后台，方便管理和导出
+- iframe 嵌入方式保持了页面的完整性和流畅体验
+- 移动端自适应，表单高度根据屏幕尺寸调整
+
+**技术实现**：
+```html
+<!-- booking.html 中的 iframe 结构 -->
+<div class="wenjuan-wrapper">
+    <iframe 
+        src="https://wj.qq.com/s2/24949516/d748/" 
+        width="100%" 
+        height="1200" 
+        frameborder="0"
+        scrolling="auto"
+        class="wenjuan-iframe">
+    </iframe>
+</div>
+```
+
+```css
+/* css/booking.css 中的样式 */
+.wenjuan-wrapper {
+    background: var(--color-white);
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 1200px;
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+```
+
+**详细文档**：见 `WENJUAN_QUICK_SETUP.md` 和 `FORM_HYBRID_SOLUTION.md`
+
+---
+
+### 2025-11-22 - 二维码点击放大功能 ✅
+
+**更新内容**：
+1. ✅ 二维码点击弹出放大版本，方便扫码
+2. ✅ 弹窗支持3种关闭方式（×按钮、点击遮罩、ESC键）
+3. ✅ 悬停显示"点击放大"提示
+4. ✅ 创建预约服务绑定公众号完整指南
+
+**修改文件**：
+- contact.html - 新增点击事件和放大弹窗
+- css/contact.css - 新增弹窗样式和交互动画
+
+**详细说明**：见 `QR_ZOOM_UPDATE.md` 和 `WECHAT_INTEGRATION_GUIDE.md`
+
+---
 
 ### 2025-11-22 - 社交媒体二维码更新 ✅
 
