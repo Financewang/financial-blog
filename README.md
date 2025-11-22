@@ -203,9 +203,54 @@ financial-blog/
 
 ---
 
+## 📝 最近更新
+
+### 2025-11-22 - 社交媒体二维码更新 ✅
+
+**更新内容**：
+1. ✅ 微信公众号名称更新为"新湾财智"，添加真实二维码
+2. ✅ 小红书名称更新为"钱淼淼"，添加真实二维码
+3. ✅ 新增二维码样式（白色背景卡片+金色阴影+悬停效果）
+
+**修改文件**：
+- contact.html - 更新社交媒体名称和二维码
+- css/contact.css - 新增 `.qr-code` 样式
+- images/xwcz.jpg - 新湾财智公众号二维码（新增）
+- images/qmmxhs.jpg - 钱淼淼小红书二维码（新增）
+
+**详细说明**：见 `QR_CODE_UPDATE.md`
+
+---
+
+### 2025-11-22 - Logo 显示问题修复 ✅
+
+**修复内容**：
+1. ✅ 修复合作伙伴 logo 无法显示的问题（路径错误：`images/partners/` → `images/`）
+2. ✅ 修复首页 Hero logo 与导航栏重叠问题（增加 `padding-top: 140px`）
+
+**修改文件**：
+- index.html - 更新6个合作伙伴 logo 路径
+- cases.html - 更新6个合作企业 logo 路径
+- css/main.css - 调整 Hero section 内容区域上边距
+
+**详细说明**：见 `LOGO_FIX_COMPLETE.md`
+
+---
+
 ## 🚀 部署指南
 
-### 方案1：Cloudflare Pages（推荐）
+### 当前部署：Vercel
+网站已部署到 Vercel，每次推送到 GitHub main 分支会自动触发部署。
+
+**快速更新命令**：
+```bash
+git add .
+git commit -m "更新描述"
+git push origin main
+# Vercel 会自动部署（约1-2分钟）
+```
+
+### 方案1：Cloudflare Pages（备选）
 ```bash
 # 1. 推送代码到GitHub
 git init
@@ -219,7 +264,7 @@ git push -u origin main
 # 4. 自动部署完成
 ```
 
-### 方案2：GitHub Pages
+### 方案2：GitHub Pages（备选）
 ```bash
 # 推送到 gh-pages 分支
 git checkout -b gh-pages
