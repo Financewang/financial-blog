@@ -173,6 +173,32 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* 真实二维码样式 */
+.qr-code {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--color-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    transition: var(--transition-normal);
+}
+
+.qr-code:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+}
+
+.qr-code img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
 .qr-note {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.5);
