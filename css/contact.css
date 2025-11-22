@@ -191,12 +191,154 @@
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
 }
 
+.qr-code {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
 .qr-code img {
     width: 100%;
     max-width: 200px;
     height: auto;
     border-radius: 8px;
     display: block;
+}
+
+/* 二维码悬停提示 */
+.qr-hint {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: var(--color-white);
+    padding: var(--spacing-sm);
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.qr-code:hover .qr-hint {
+    opacity: 1;
+}
+
+.qr-hint i {
+    font-size: 1rem;
+}
+
+/* 二维码放大弹窗 */
+.qr-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.qr-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.qr-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.qr-modal-content {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: var(--spacing-lg);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+}
+
+.qr-modal.active .qr-modal-content {
+    transform: scale(1);
+}
+
+.qr-modal-close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: var(--color-gold);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.qr-modal-close:hover {
+    background: var(--color-deep-blue);
+    transform: rotate(90deg);
+}
+
+.qr-modal h3 {
+    color: var(--color-black);
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.qr-modal-image {
+    background: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: 15px;
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qr-modal-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.qr-modal-hint {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.qr-modal-hint i {
+    color: var(--color-gold);
+    font-size: 1.2rem;
 }
 
 .qr-note {
