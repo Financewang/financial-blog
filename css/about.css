@@ -1,0 +1,488 @@
+/* ===================================
+   About Page Styles
+   =================================== */
+
+.page-hero {
+    padding: 160px 0 80px;
+    background: var(--gradient-dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+}
+
+.hero-logo-animation {
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.hero-logo-animation img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6));
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+.page-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: var(--spacing-sm);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-tagline {
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 300;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-slogan {
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+/* Company Intro */
+.company-intro {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-black);
+}
+
+.intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--color-light-gray);
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+}
+
+.intro-text strong {
+    color: var(--color-gold);
+    font-weight: 700;
+}
+
+/* Mission Vision Values */
+.mvv-section {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-dark-gray);
+}
+
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.mvv-card {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--color-gray);
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: var(--transition-normal);
+}
+
+.mvv-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.mvv-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+}
+
+.mvv-icon i {
+    font-size: 3rem;
+    color: var(--color-black);
+}
+
+.mvv-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gold);
+}
+
+.mvv-card p {
+    font-size: 1.2rem;
+    color: var(--color-light-gray);
+    line-height: 1.8;
+}
+
+/* Business Structure */
+.business-structure {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-black);
+}
+
+.structure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.structure-card {
+    background: var(--color-dark-gray);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: var(--transition-normal);
+    position: relative;
+}
+
+.structure-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.structure-number {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(212, 175, 55, 0.1);
+    line-height: 1;
+}
+
+.structure-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--color-gold);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.structure-icon i {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+}
+
+.structure-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gold);
+}
+
+.structure-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.structure-card ul li {
+    color: var(--color-light-gray);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.structure-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+}
+
+/* Lifecycle Section */
+.lifecycle-section {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-dark-gray);
+}
+
+.lifecycle-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.flow-item {
+    text-align: center;
+}
+
+.flow-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-sm);
+    transition: var(--transition-normal);
+}
+
+.flow-item:hover .flow-icon {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-gold);
+}
+
+.flow-icon i {
+    font-size: 2rem;
+    color: var(--color-black);
+}
+
+.flow-item h4 {
+    font-size: 1.1rem;
+    color: var(--color-gold);
+    white-space: nowrap;
+}
+
+.flow-arrow {
+    color: var(--color-gold);
+    font-size: 1.5rem;
+}
+
+/* Intelligence Section */
+.intelligence-section {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-black);
+}
+
+.intelligence-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+}
+
+.intelligence-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brain-circle {
+    width: 250px;
+    height: 250px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: brainPulse 3s ease-in-out infinite;
+    box-shadow: var(--shadow-gold);
+}
+
+.brain-circle i {
+    font-size: 6rem;
+    color: var(--color-black);
+}
+
+.intelligence-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: var(--color-light-gray);
+    margin-bottom: var(--spacing-lg);
+}
+
+.intelligence-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.feature-box {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-dark-gray);
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: var(--transition-normal);
+}
+
+.feature-box:hover {
+    border-color: var(--color-gold);
+    transform: translateX(10px);
+}
+
+.feature-box i {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    flex-shrink: 0;
+}
+
+.feature-box h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-gold);
+}
+
+.feature-box p {
+    color: var(--color-light-gray);
+}
+
+/* Why Choose Us */
+.why-choose {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-dark-gray);
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.advantage-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--color-gray);
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: var(--transition-normal);
+}
+
+.advantage-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-md);
+}
+
+.advantage-card i {
+    font-size: 3rem;
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-md);
+}
+
+.advantage-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gold);
+}
+
+.advantage-card p {
+    color: var(--color-light-gray);
+    line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .intelligence-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .intelligence-visual {
+        order: 2;
+        margin-top: var(--spacing-lg);
+    }
+    
+    .intelligence-text {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        padding: 140px 0 60px;
+    }
+    
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-tagline {
+        font-size: 1.2rem;
+    }
+    
+    .hero-slogan {
+        font-size: 1.4rem;
+    }
+    
+    .hero-logo-animation img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .mvv-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lifecycle-flow {
+        flex-direction: column;
+    }
+    
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .brain-circle {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .brain-circle i {
+        font-size: 4.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .structure-grid {
+        grid-template-columns: 1fr;
+    }
+}
