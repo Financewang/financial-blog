@@ -3,262 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>老汪的Financial笔记 - 财务BP的实战笔记</title>
-    <meta name="description" content="12年财务管理经验，专注经营分析和财务BP带教，让数字讲出商业故事">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Font Awesome 图标库 - 使用多个CDN源确保加载 -->
-    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta name="description" content="新湾咨询集团 - 钱淼淼平台，全生命周期企业业财赋能伙伴。提供财税合规、股权架构、行业研究、MCN服务。">
+    <meta name="keywords" content="新湾咨询,钱淼淼,财税合规,股权架构,BP服务,MCN服务,企业咨询">
+    <title>新湾咨询集团 - 钱淼淼 | 成就未来价值企业</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.font.im/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <!-- 左侧导航栏 -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <i class="fas fa-chart-line"></i>
-                <span>老汪的Financial笔记</span>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="钱淼淼 Logo">
+                <span class="logo-text">钱淼淼</span>
             </div>
-        </div>
-        
-        <nav class="sidebar-nav">
-            <div class="nav-section">
-                <h3>GENERAL</h3>
-                <ul>
-                    <li class="active">
-                        <i class="fas fa-home"></i>
-                        <span>首页</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-newspaper"></i>
-                        <span>近期文章</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-toolbox"></i>
-                        <span>财务工具包</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-users"></i>
-                        <span>BP社群</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-user"></i>
-                        <span>关于我</span>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-section">
-                <h3>外部链接</h3>
-                <ul>
-                    <li class="social-nav-link" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/wechat-qr.jpg" data-title="微信公众号" data-desc="使用微信扫码关注「老汪的Financial笔记」">
-                        <i class="fab fa-weixin"></i>
-                        <span>公众号</span>
-                    </li>
-                    <li class="social-nav-link" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/xiaohongshu.jpg" data-title="小红书" data-desc="使用小红书扫码关注 @老汪的Financial笔记">
-                        <i class="fas fa-book"></i>
-                        <span>小红书</span>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
-        <div class="sidebar-footer">
-            <button class="write-btn">
-                <i class="fas fa-pen"></i>
-                <span>写文章</span>
-            </button>
-        </div>
-    </aside>
-
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <!-- 欢迎卡片 -->
-        <section class="welcome-card card">
-            <div class="welcome-content">
-                <div class="avatar-section">
-                    <div class="avatar">
-                        <img src="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/touxiang.jpg" alt="老汪头像">
-                    </div>
-                    <div class="welcome-text">
-                        <h1>你好，我是老汪</h1>
-                        <p class="subtitle">财务人的实战笔记 | 让数字讲出商业故事</p>
-                        <p class="description">
-                            12年财务管理经验，历任多个公司财务总监，倡导战略财务，擅长经营分析。
-                            不讲教条，只给实战方法。这里是财务BP的成长基地。
-                        </p>
-                    </div>
-                </div>
-                <div class="welcome-illustration">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-            </div>
-        </section>
-
-        <!-- 最新文章 -->
-        <section class="articles-section">
-            <div class="section-header">
-                <h2>最新文章</h2>
-                <span class="article-count">共 3 篇文章</span>
-            </div>
-            
-            <div class="articles-grid">
-                <!-- 文章卡片1 -->
-                <article class="article-card card">
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="far fa-calendar"></i>
-                            2025-11-22
-                        </span>
-                        <span class="tag">创业融资</span>
-                    </div>
-                    <h3 class="article-title">创业融资找FA？这20家机构靠谱，但要小心这些坑</h3>
-                    <p class="article-excerpt">
-                        创业者找钱，有两条路。一条是自己拿着BP到处投，效率低，成功率更低。
-                        另一条是找FA帮你对接投资人，专业的事交给专业的人做。但FA这个行业，水很深。
-                    </p>
-                    <div class="article-footer">
-                        <span class="read-time">
-                            <i class="far fa-clock"></i>
-                            8 分钟阅读
-                        </span>
-                        <a href="articles/article1.html" class="read-more">阅读全文 →</a>
-                    </div>
-                </article>
-
-                <!-- 文章卡片2 -->
-                <article class="article-card card">
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="far fa-calendar"></i>
-                            2025-11-22
-                        </span>
-                        <span class="tag">投资机构</span>
-                    </div>
-                    <h3 class="article-title">创业者必备：最新投资机构和商业计划书投递邮箱，建议收藏！</h3>
-                    <p class="article-excerpt">
-                        在创业这条路上，找到合适的投资人，比找对象还难。不是钱的问题，是门路的问题。
-                        你辛辛苦苦打磨出来的BP，发给谁？怎么发？发了会不会石沉大海？
-                    </p>
-                    <div class="article-footer">
-                        <span class="read-time">
-                            <i class="far fa-clock"></i>
-                            12 分钟阅读
-                        </span>
-                        <a href="articles/article2.html" class="read-more">阅读全文 →</a>
-                    </div>
-                </article>
-
-                <!-- 文章卡片3 -->
-                <article class="article-card card">
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="far fa-calendar"></i>
-                            2025-11-22
-                        </span>
-                        <span class="tag">BP技巧</span>
-                    </div>
-                    <h3 class="article-title">创业者还想拿融资？我建议你先用投资人的视角看看自己的BP</h3>
-                    <p class="article-excerpt">
-                        这两天又有个创业者找我，说想融资，问我能不能帮他对接投资人。
-                        我看了他的BP，第一感觉是：这人压根没见过投资人长什么样。
-                    </p>
-                    <div class="article-footer">
-                        <span class="read-time">
-                            <i class="far fa-clock"></i>
-                            6 分钟阅读
-                        </span>
-                        <a href="articles/article3.html" class="read-more">阅读全文 →</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <!-- 右侧边栏 -->
-    <aside class="right-sidebar">
-        <!-- 时钟卡片 -->
-        <div class="clock-card card">
-            <div class="clock-display">
-                <div class="time" id="time">00:00:00</div>
-                <div class="date" id="date">2025年1月</div>
-            </div>
-        </div>
-
-        <!-- 日历卡片 -->
-        <div class="calendar-card card">
-            <div class="calendar-header">
-                <button class="calendar-nav" id="prevMonth">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <span class="calendar-title" id="calendarTitle">2025年1月</span>
-                <button class="calendar-nav" id="nextMonth">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div class="calendar-body" id="calendar"></div>
-        </div>
-
-        <!-- 快捷工具卡片 -->
-        <div class="tools-card card">
-            <h3>关注我</h3>
-            <div class="social-links">
-                <a href="#" class="social-link wechat" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/wechat-qr.jpg">
-                    <i class="fab fa-weixin"></i>
-                    <div class="social-info">
-                        <span class="social-name">微信公众号</span>
-                        <span class="social-desc">老汪的Financial笔记</span>
-                    </div>
-                </a>
-                <a href="#" class="social-link xiaohongshu" data-qr="https://raw.githubusercontent.com/Financewang/financial-blog/main/images/xiaohongshu.jpg">
-                    <i class="fas fa-book"></i>
-                    <div class="social-info">
-                        <span class="social-name">小红书</span>
-                        <span class="social-desc">@老汪的Financial笔记</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- 二维码弹窗 -->
-        <div class="qr-modal" id="qrModal">
-            <div class="qr-modal-overlay"></div>
-            <div class="qr-modal-content">
-                <button class="qr-modal-close" id="closeQrModal">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="qr-modal-body">
-                    <h3 id="qrModalTitle">扫码关注</h3>
-                    <img id="qrModalImage" src="" alt="二维码">
-                    <p id="qrModalDesc">使用微信扫码关注</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 工具推荐卡片 -->
-        <div class="recommend-card card">
-            <h3>实用工具</h3>
-            <ul class="tool-list">
-                <li>
-                    <i class="fas fa-file-excel"></i>
-                    <span>财务分析工具包</span>
-                </li>
-                <li>
-                    <i class="fas fa-chart-pie"></i>
-                    <span>本量利计算器</span>
-                </li>
-                <li>
-                    <i class="fas fa-calculator"></i>
-                    <span>ROI评估模板</span>
-                </li>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">首页</a></li>
+                <li><a href="about.html" class="nav-link">关于我们</a></li>
+                <li><a href="services.html" class="nav-link">服务内容</a></li>
+                <li><a href="cases.html" class="nav-link">合作案例</a></li>
+                <li><a href="articles.html" class="nav-link">资讯文章</a></li>
+                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+                <li><a href="booking.html" class="nav-link nav-cta">预约服务</a></li>
             </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </aside>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="logo-animation">
+                <img src="images/logo.png" alt="钱淼淼 Logo" class="hero-logo">
+            </div>
+            <h1 class="hero-title">成就未来价值企业</h1>
+            <div class="hero-subtitle">
+                <div class="subtitle-en">QIANMIAOMIAOCAP</div>
+                <div class="subtitle-zh">钱 淼 淼</div>
+            </div>
+            <p class="hero-description">全生命周期企业业财赋能伙伴</p>
+            <div class="hero-buttons">
+                <a href="services.html" class="btn btn-primary">了解更多</a>
+                <a href="booking.html" class="btn btn-secondary">立即咨询</a>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-item">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>使命</h3>
+                    <p>帮助企业实现持续的成功</p>
+                </div>
+                <div class="mission-item">
+                    <i class="fas fa-eye"></i>
+                    <h3>愿景</h3>
+                    <p>成为全球领先的企业业财赋能型伙伴</p>
+                </div>
+                <div class="mission-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>价值观</h3>
+                    <p>谦卑、利他、成就</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">核心业务</h2>
+                <p class="section-subtitle">四大板块 · 全方位赋能</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1: 财税合规 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="service-title">财税合规</h3>
+                    <p class="service-description">专业的财税合规服务，助力企业规范运营</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> 财税合规服务</li>
+                        <li><i class="fas fa-check"></i> 账务清理服务</li>
+                        <li><i class="fas fa-check"></i> 财务托管服务</li>
+                        <li><i class="fas fa-check"></i> 财税培训服务</li>
+                    </ul>
+                    <a href="services.html#finance" class="service-link">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 2: 股权架构 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3 class="service-title">股权架构</h3>
+                    <p class="service-description">科学的股权设计，为企业发展保驾护航</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> BP服务</li>
+                        <li><i class="fas fa-check"></i> 股权设计服务</li>
+                        <li><i class="fas fa-check"></i> 境外股权服务</li>
+                        <li><i class="fas fa-check"></i> 股权激励服务</li>
+                    </ul>
+                    <a href="services.html#equity" class="service-link">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 3: 行业研究 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">行业研究</h3>
+                    <p class="service-description">深度行业洞察，精准把握市场机遇</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> 消费研究</li>
+                        <li><i class="fas fa-check"></i> 鞋服研究</li>
+                        <li><i class="fas fa-check"></i> 供应链研究</li>
+                        <li><i class="fas fa-check"></i> AI数字化</li>
+                    </ul>
+                    <a href="services.html#research" class="service-link">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 4: MCN服务 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="service-title">MCN服务</h3>
+                    <p class="service-description">IP孵化与品牌营销，打造行业影响力</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> 财税IP孵化</li>
+                        <li><i class="fas fa-check"></i> 教育与培训</li>
+                        <li><i class="fas fa-check"></i> 营销宣传</li>
+                    </ul>
+                    <a href="services.html#mcn" class="service-link">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifecycle Section -->
+    <section class="lifecycle">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">全生命周期陪跑</h2>
+                <p class="section-subtitle">从基础财税到股权融资的全链路赋能服务</p>
+            </div>
+            <div class="lifecycle-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>天使轮</h4>
+                    <p>初创期支持</p>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>VC</h4>
+                    <p>快速成长期</p>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>PE</h4>
+                    <p>成熟扩张期</p>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h4>IPO</h4>
+                    <p>上市辅导</p>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>重组并购</h4>
+                    <p>战略整合</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intelligence Section -->
+    <section class="intelligence">
+        <div class="container">
+            <div class="intelligence-content">
+                <div class="intelligence-text">
+                    <h2>数智大脑</h2>
+                    <p class="lead">基于大数据与人工智能的决策支持系统</p>
+                    <div class="intelligence-features">
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h4>行业数据分析数据库</h4>
+                                <p>海量行业数据，精准市场洞察</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <h4>商业咨询案例数据库</h4>
+                                <p>丰富实战案例，专业解决方案</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h4>商业人才培养大脑</h4>
+                                <p>智能培训体系，赋能团队成长</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intelligence-visual">
+                    <div class="brain-animation">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">合作伙伴</h2>
+                <p class="section-subtitle">携手共创价值未来</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <img src="images/partners/mcc-cisdi.png" alt="MCC CISDI">
+                </div>
+                <div class="partner-item">
+                    <img src="images/partners/guohu-aviation.png" alt="国鸽航空">
+                </div>
+                <div class="partner-item">
+                    <img src="images/partners/fmsion.png" alt="FMsion">
+                </div>
+                <div class="partner-item">
+                    <img src="images/partners/aikosha.png" alt="AIKOSHA">
+                </div>
+                <div class="partner-item">
+                    <img src="images/partners/meicun.png" alt="美村">
+                </div>
+                <div class="partner-item">
+                    <img src="images/partners/yuqing-education.png" alt="育清教育集团">
+                </div>
+            </div>
+            <div class="partners-cta">
+                <a href="cases.html" class="btn btn-outline">查看更多案例</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>开启您的成功之旅</h2>
+                <p>专业团队随时为您提供定制化解决方案</p>
+                <div class="cta-buttons">
+                    <a href="booking.html" class="btn btn-primary btn-lg">预约咨询</a>
+                    <a href="contact.html" class="btn btn-outline btn-lg">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="钱淼淼 Logo">
+                        <h3>新湾咨询集团</h3>
+                        <p>钱淼淼平台</p>
+                    </div>
+                    <p class="footer-description">全生命周期企业业财赋能伙伴</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="services.html">服务内容</a></li>
+                        <li><a href="cases.html">合作案例</a></li>
+                        <li><a href="articles.html">资讯文章</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>服务内容</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#finance">财税合规</a></li>
+                        <li><a href="services.html#equity">股权架构</a></li>
+                        <li><a href="services.html#research">行业研究</a></li>
+                        <li><a href="services.html#mcn">MCN服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> xinwancaizhi@163.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区经开区<br>江峡路1号11幢2单元3楼</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 新湾咨询集团 · 钱淼淼平台. All rights reserved.</p>
+                <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">渝ICP备2024031752号</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
 </html>

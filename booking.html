@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="新湾咨询集团服务预约 - 预约专业咨询服务">
+    <title>服务预约 - 新湾咨询集团</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="钱淼淼 Logo">
+                <span class="logo-text">钱淼淼</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="about.html" class="nav-link">关于我们</a></li>
+                <li><a href="services.html" class="nav-link">服务内容</a></li>
+                <li><a href="cases.html" class="nav-link">合作案例</a></li>
+                <li><a href="articles.html" class="nav-link">资讯文章</a></li>
+                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+                <li><a href="booking.html" class="nav-link nav-cta active">预约服务</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                <div class="booking-info">
+                    <h1>预约咨询服务</h1>
+                    <p class="lead">填写预约信息，我们的专业团队将在24小时内与您联系</p>
+                    
+                    <div class="booking-features">
+                        <div class="feature-box">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h3>信息安全</h3>
+                                <p>您的信息将被严格保密</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>快速响应</h3>
+                                <p>24小时内专人回复</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <h3>专业团队</h3>
+                                <p>12年行业经验专家服务</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <h3>联系方式</h3>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> xinwancaizhi@163.com</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区经开区江峡路1号11幢2单元3楼</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="booking-form-container">
+                    <form id="bookingForm" class="booking-form">
+                        <div class="form-group">
+                            <label for="companyName">企业名称 <span class="required">*</span></label>
+                            <input type="text" id="companyName" name="companyName" required placeholder="请输入企业名称">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactPerson">联系人 <span class="required">*</span></label>
+                            <input type="text" id="contactPerson" name="contactPerson" required placeholder="请输入您的姓名">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactPhone">联系方式 <span class="required">*</span></label>
+                            <input type="tel" id="contactPhone" name="contactPhone" required placeholder="请输入手机号码">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceType">需要什么服务 <span class="required">*</span></label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">请选择服务类型</option>
+                                <optgroup label="财税合规板块">
+                                    <option value="财税合规服务">财税合规服务</option>
+                                    <option value="账务清理服务">账务清理服务</option>
+                                    <option value="财务托管服务">财务托管服务</option>
+                                    <option value="财税培训服务">财税培训服务</option>
+                                </optgroup>
+                                <optgroup label="股权架构板块">
+                                    <option value="BP服务">BP服务</option>
+                                    <option value="股权设计服务">股权设计服务</option>
+                                    <option value="境外股权服务">境外股权服务</option>
+                                    <option value="股权激励服务">股权激励服务</option>
+                                </optgroup>
+                                <optgroup label="行业研究板块">
+                                    <option value="消费研究">消费研究</option>
+                                    <option value="鞋服研究">鞋服研究</option>
+                                    <option value="供应链研究">供应链研究</option>
+                                    <option value="AI数字化">AI数字化</option>
+                                </optgroup>
+                                <optgroup label="MCN服务板块">
+                                    <option value="财税IP孵化">财税IP孵化</option>
+                                    <option value="教育与培训">教育与培训</option>
+                                    <option value="营销宣传">营销宣传</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companySize">企业规模</label>
+                            <select id="companySize" name="companySize">
+                                <option value="">请选择（选填）</option>
+                                <option value="1-50人">1-50人</option>
+                                <option value="51-200人">51-200人</option>
+                                <option value="201-500人">201-500人</option>
+                                <option value="500人以上">500人以上</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">具体需求描述</label>
+                            <textarea id="message" name="message" rows="5" placeholder="请简要描述您的需求（选填）"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i> 提交预约
+                        </button>
+
+                        <p class="form-note">提交即表示您同意我们的隐私政策，我们将妥善保护您的个人信息</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="钱淼淼 Logo">
+                        <h3>新湾咨询集团</h3>
+                        <p>钱淼淼平台</p>
+                    </div>
+                    <p class="footer-description">全生命周期企业业财赋能伙伴</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="services.html">服务内容</a></li>
+                        <li><a href="cases.html">合作案例</a></li>
+                        <li><a href="articles.html">资讯文章</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>服务内容</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#finance">财税合规</a></li>
+                        <li><a href="services.html#equity">股权架构</a></li>
+                        <li><a href="services.html#research">行业研究</a></li>
+                        <li><a href="services.html#mcn">MCN服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> xinwancaizhi@163.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区经开区<br>江峡路1号11幢2单元3楼</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 新湾咨询集团 · 钱淼淼平台. All rights reserved.</p>
+                <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">渝ICP备2024031752号</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
