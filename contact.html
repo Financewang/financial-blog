@@ -99,8 +99,12 @@
                                 </div>
                                 <h4>微信公众号</h4>
                                 <p>新湾财智</p>
-                                <div class="qr-code">
+                                <div class="qr-code" onclick="openQRModal('images/xwcz.jpg', '新湾财智公众号')">
                                     <img src="images/xwcz.jpg" alt="新湾财智公众号二维码">
+                                    <div class="qr-hint">
+                                        <i class="fas fa-search-plus"></i>
+                                        <span>点击放大</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -110,8 +114,12 @@
                                 </div>
                                 <h4>小红书</h4>
                                 <p>钱淼淼</p>
-                                <div class="qr-code">
+                                <div class="qr-code" onclick="openQRModal('images/qmmxhs.jpg', '钱淼淼小红书')">
                                     <img src="images/qmmxhs.jpg" alt="钱淼淼小红书二维码">
+                                    <div class="qr-hint">
+                                        <i class="fas fa-search-plus"></i>
+                                        <span>点击放大</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +272,51 @@
             
             showAlert('留言提交成功！我们会尽快与您联系。', 'success');
             this.reset();
+        });
+    </script>
+
+    <!-- 二维码放大弹窗 -->
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-modal-overlay" onclick="closeQRModal()"></div>
+        <div class="qr-modal-content">
+            <button class="qr-modal-close" onclick="closeQRModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="qrModalTitle">扫描二维码</h3>
+            <div class="qr-modal-image">
+                <img id="qrModalImg" src="" alt="二维码">
+            </div>
+            <p class="qr-modal-hint">
+                <i class="fas fa-mobile-alt"></i>
+                使用微信/小红书扫一扫
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 二维码放大功能
+        function openQRModal(imageSrc, title) {
+            const modal = document.getElementById('qrModal');
+            const modalImg = document.getElementById('qrModalImg');
+            const modalTitle = document.getElementById('qrModalTitle');
+            
+            modalImg.src = imageSrc;
+            modalTitle.textContent = title;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+
+        function closeQRModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // 恢复滚动
+        }
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeQRModal();
+            }
         });
     </script>
 </body>
